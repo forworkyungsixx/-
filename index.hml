@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบจองห้องประชุม YUNGS!XX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Kanit',sans-serif;min-height:100vh;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}.login-container{max-width:450px;margin:100px auto;background:#fff;border-radius:20px;padding:50px 40px;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:fadeIn .5s ease-out;text-align:center}.login-logo{font-size:48px;margin-bottom:20px}.login-title{font-size:32px;font-weight:600;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}.login-subtitle{color:#666;font-size:16px;margin-bottom:40px;font-weight:300}.login-form{text-align:left}.login-form .form-group{margin-bottom:20px}.login-form label{display:block;font-size:14px;font-weight:500;color:#333;margin-bottom:8px}.login-form input{width:100%;padding:14px 16px;border:2px solid #e0e0e0;background:#fff;border-radius:10px;font-family:'Kanit',sans-serif;font-size:15px;transition:all .3s ease;color:#333}.login-form input:focus{outline:0;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}.login-form input::placeholder{color:#999;font-weight:300}.login-btn{width:100%;padding:14px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;border-radius:10px;font-family:'Kanit',sans-serif;font-size:16px;font-weight:500;cursor:pointer;transition:all .3s ease;margin-top:10px;box-shadow:0 4px 15px rgba(102,126,234,.4)}.login-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 25px rgba(102,126,234,.5)}.login-btn:disabled{opacity:.6;cursor:not-allowed}.login-note{margin-top:25px;padding:15px;background:#f8f9fa;border-radius:10px;font-size:13px;color:#666;line-height:1.6}#passwordGroup{display:none}.user-info{position:fixed;top:20px;right:20px;background:#fff;padding:12px 20px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,.2);display:none;align-items:center;gap:15px;z-index:1000}.user-info.active{display:flex}.user-badge{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600}.badge-admin{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}.badge-test{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);color:#fff}.badge-user{background:#e8f5e8;color:#2e7d32}.user-email{font-size:14px;color:#333;font-weight:500}.logout-btn{padding:8px 16px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;border-radius:8px;font-family:'Kanit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .3s ease}.logout-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(102,126,234,.4)}.main-container{max-width:1400px;margin:0 auto;display:none;flex-direction:column;gap:30px}.main-container.active{display:flex}.checkin-hero{width:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:20px;padding:50px 40px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center;color:#fff;animation:fadeIn .5s ease-out;position:relative;overflow:hidden}.checkin-hero::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 70%);animation:pulse 3s infinite}.checkin-hero h1{font-size:36px;font-weight:700;margin-bottom:15px;text-shadow:0 2px 10px rgba(0,0,0,.2);position:relative;z-index:2}.checkin-hero p{font-size:18px;margin-bottom:30px;opacity:.95;position:relative;z-index:2}.checkin-input-group{max-width:500px;margin:0 auto;position:relative;z-index:2}.checkin-input-large{width:100%;padding:20px 25px;border:3px solid rgba(255,255,255,.3);background:rgba(255,255,255,.95);border-radius:15px;font-family:'Kanit',sans-serif;font-size:28px;font-weight:700;text-align:center;letter-spacing:8px;text-transform:uppercase;transition:all .3s ease;color:#333;box-shadow:0 10px 30px rgba(0,0,0,.2)}.checkin-input-large:focus{outline:0;border-color:#fff;background:#fff;box-shadow:0 15px 40px rgba(0,0,0,.3);transform:translateY(-2px)}.checkin-input-large::placeholder{color:#999;letter-spacing:3px;font-size:20px;font-weight:400}.checkin-buttons{display:flex;gap:15px;margin-top:25px}.checkin-buttons button{flex:1;padding:18px;font-size:18px;font-weight:600;border-radius:12px;border:none;cursor:pointer;transition:all .3s ease;text-transform:uppercase;letter-spacing:1px;box-shadow:0 8px 20px rgba(0,0,0,.2)}.btn-checkin{background:linear-gradient(135deg,#56ab2f 0%,#a8e063 100%);color:#fff}.btn-checkin:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 30px rgba(86,171,47,.4)}.btn-checkout{background:linear-gradient(135deg,#f2994a 0%,#f2c94c 100%);color:#fff}.btn-checkout:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 30px rgba(242,153,74,.4)}.checkin-buttons button:disabled{opacity:.5;cursor:not-allowed;transform:none}.checkin-info-box{background:rgba(255,255,255,.15);border-radius:12px;padding:20px;margin-top:30px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);position:relative;z-index:2}.checkin-info-box h3{font-size:18px;margin-bottom:12px;font-weight:600}.checkin-info-box ul{text-align:left;margin:0 auto;max-width:400px;line-height:2}.checkin-info-box ul li{font-size:15px;opacity:.9}@keyframes pulse{0%,100%{transform:translate(0,0)}50%{transform:translate(-5%,-5%)}}.top-row{display:flex;gap:30px;flex-wrap:wrap}.booking-container,.my-bookings-container{flex:1;min-width:300px;background:#fff;border-radius:20px;padding:40px 30px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeIn .5s ease-out;height:fit-content}.schedule-container-full{width:100%;background:#fff;border-radius:20px;padding:40px 30px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeIn .5s ease-out}.admin-dashboard{max-width:1400px;margin:0 auto;display:none}.admin-dashboard.active{display:block}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-bottom:30px}.stat-card{background:#fff;padding:25px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,.15);transition:all .3s ease}.stat-card:hover{transform:translateY(-5px);box-shadow:0 8px 25px rgba(0,0,0,.2)}.stat-card h3{font-size:16px;color:#666;margin-bottom:10px}.stat-card .number{font-size:36px;font-weight:600;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.admin-section{background:#fff;padding:30px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,.15);margin-bottom:20px}@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}h1,h2{text-align:center;font-weight:600;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px}h1{font-size:28px}h2{font-size:24px}.form-group{margin-bottom:20px}.form-row{display:flex;gap:15px}.form-row .form-group{flex:1}label{display:block;font-size:14px;font-weight:500;color:#333;margin-bottom:8px}label span{color:#667eea}input,select,textarea{width:100%;padding:12px 16px;border:2px solid #e0e0e0;background:#fff;border-radius:10px;font-family:'Kanit',sans-serif;font-size:15px;transition:all .3s ease;color:#333}textarea{min-height:80px;resize:vertical}input:focus,select:focus,textarea:focus{outline:0;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}input::placeholder,textarea::placeholder{color:#999;font-weight:300}input:disabled,select:disabled,textarea:disabled{opacity:.6;cursor:not-allowed;background:#fafafa}button{width:100%;padding:14px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;border-radius:10px;font-family:'Kanit',sans-serif;font-size:16px;font-weight:500;cursor:pointer;transition:all .3s ease;margin-top:10px;box-shadow:0 4px 15px rgba(102,126,234,.4)}button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 25px rgba(102,126,234,.5)}button:disabled{opacity:.6;cursor:not-allowed}.btn-danger{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)}.btn-edit{background:linear-gradient(135deg,#2196f3 0%,#1976d2 100%)}.btn-success{background:linear-gradient(135deg,#56ab2f 0%,#a8e063 100%)}.btn-warning{background:linear-gradient(135deg,#f2994a 0%,#f2c94c 100%)}.loading{display:none;text-align:center;margin-top:20px}.spinner{width:40px;height:40px;margin:0 auto 10px;border:3px solid rgba(102,126,234,.2);border-top-color:#667eea;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.message{padding:12px 16px;margin-top:20px;border-radius:10px;text-align:center;display:none;font-size:14px}.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}.schedule-controls{display:flex;gap:15px;margin-bottom:20px;align-items:center;flex-wrap:wrap}.schedule-controls input{max-width:200px}.schedule-table{overflow-x:auto;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.1)}table{width:100%;border-collapse:collapse;min-width:800px}td,th{padding:14px 10px;text-align:center;border-bottom:1px solid #e0e0e0;font-size:13px}th{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;font-weight:500;position:sticky;top:0;z-index:10}th:first-child{border-top-left-radius:10px}th:last-child{border-top-right-radius:10px}td{background:#f8f9fa;font-weight:300}.room-cell{font-weight:600;background:#fff;color:#333;font-size:14px}.booked{background:#ffebee;color:#c62828;font-weight:500}.available{background:#e8f5e8;color:#2e7d32;font-weight:500;cursor:pointer;transition:all .2s ease;position:relative}.available:hover{background:#c8e6c9!important;transform:scale(1.05);box-shadow:0 2px 8px rgba(46,125,50,.3);z-index:5}.available:hover::after{content:'📝 คลิกเพื่อจอง';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(46,125,50,.95);color:#fff;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.2)}.using{background:#fff3cd;color:#f57c00;font-weight:600}.canceled{background:#e0e0e0;color:#757575;font-weight:400;text-decoration:line-through}.locked{background:#e3f2fd;color:#1565c0;font-weight:600}.booked,.using,.locked{cursor:not-allowed}.booking-info{font-size:11px;line-height:1.4}.booking-item{background:#f8f9fa;padding:20px;border-radius:12px;margin-bottom:15px;border-left:5px solid #667eea;transition:all .3s ease;position:relative}.booking-item:hover{transform:translateX(5px);box-shadow:0 5px 20px rgba(0,0,0,.1)}.booking-item.checked-in{border-left-color:#f57c00;background:#fff8e1}.booking-item.checked-out{border-left-color:#2e7d32;background:#f1f8f4;opacity:.85}.booking-item.canceled{border-left-color:#9e9e9e;background:#f5f5f5;opacity:.6}.booking-item h4{color:#667eea;margin-bottom:10px;font-size:18px}.booking-item p{font-size:14px;color:#666;margin:6px 0}.booking-code-display{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:15px;border-radius:10px;margin:15px 0;text-align:center}.booking-code-display .code-label{font-size:13px;opacity:.9;margin-bottom:5px}.booking-code-display .code-value{font-size:32px;font-weight:700;letter-spacing:6px;text-shadow:0 2px 5px rgba(0,0,0,.2)}.delete-btn{width:auto;padding:10px 20px;font-size:14px;margin-top:10px}.booking-notice{background:#fff3cd;border-left:4px solid #ffc107;padding:15px;margin-bottom:20px;border-radius:8px}.booking-notice h3{color:#856404;font-size:16px;margin-bottom:10px;font-weight:600}.booking-notice ul{margin-left:20px;color:#856404;font-size:14px;line-height:1.8}.booking-notice ul li{margin:5px 0}.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:9999;animation:fadeIn .3s ease-out}.modal-overlay.active{display:flex}.modal-content{background:#fff;border-radius:20px;padding:40px;max-width:600px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp .3s ease-out;position:relative}@keyframes slideUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}.modal-header{text-align:center;margin-bottom:25px}.modal-header h2{font-size:28px;color:#667eea;margin-bottom:10px}.modal-body{text-align:left;margin-bottom:30px}.modal-body .rule-list{background:#fff3cd;border-left:4px solid #ffc107;padding:20px;border-radius:10px;margin-bottom:20px}.modal-body .rule-list h3{color:#856404;font-size:18px;margin-bottom:15px;font-weight:600}.modal-body .rule-list ul{margin-left:25px;color:#856404;font-size:15px;line-height:1.8}.modal-body .rule-list ul li{margin:8px 0}.modal-body .rule-list ul li strong{color:#664d03}.modal-footer{text-align:center}.modal-footer .button-group{display:flex;gap:10px}.modal-footer .button-group button{flex:1}.modal-btn{width:100%;padding:15px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border:none;border-radius:10px;font-family:'Kanit',sans-serif;font-size:16px;font-weight:600;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 15px rgba(102,126,234,0.4)}.modal-btn:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(102,126,234,0.5)}.modal-select{width:100%;padding:12px 16px;border:2px solid #e0e0e0;background:#fff;border-radius:10px;font-family:'Kanit',sans-serif;font-size:15px;transition:all 0.3s ease;color:#333;cursor:pointer}.modal-select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,0.1)}.modal-select:disabled{opacity:0.6;cursor:not-allowed;background:#fafafa}.edit-count-badge{display:inline-block;padding:4px 10px;background:#e3f2fd;color:#1565c0;border-radius:6px;font-size:12px;font-weight:600;margin-left:8px}.edit-count-warning{background:#ffebee;color:#c62828}.status-badge{display:inline-block;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-left:10px}.status-waiting{background:#fff3cd;color:#856404}.status-using{background:#ffe0b2;color:#e65100}.status-completed{background:#e8f5e9;color:#2e7d32}.status-canceled{background:#e0e0e0;color:#757575}.status-locked{background:#e3f2fd;color:#1565c0}.admin-checkin-monitor{max-width:1400px;margin:30px auto;background:#fff;border-radius:20px;padding:40px 30px;box-shadow:0 20px 60px rgba(0,0,0,.2);display:none}.checkin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:30px}.checkin-stat-card{background:#f8f9fa;padding:20px;border-radius:10px;text-align:center;border:2px solid #e0e0e0;transition:all .3s ease}.checkin-stat-card:hover{transform:translateY(-3px);box-shadow:0 5px 15px rgba(0,0,0,.1)}.checkin-stat-card .number{font-size:32px;font-weight:600;color:#667eea}.checkin-stat-card .label{font-size:14px;color:#666;margin-top:5px}@keyframes pulseBooking{0%,100%{box-shadow:0 20px 60px rgba(0,0,0,.2)}50%{box-shadow:0 25px 80px rgba(102,126,234,.6);transform:scale(1.02)}}.chart-container{background:#f8f9fa;padding:20px;border-radius:10px;margin:20px 0}.chart-title{font-size:18px;font-weight:600;color:#333;margin-bottom:15px;text-align:center}.chart-bar{margin:10px 0}.chart-bar-label{display:flex;justify-content:space-between;margin-bottom:5px;font-size:13px;color:#666}.chart-bar-fill{height:30px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:5px;transition:all .3s ease;position:relative;overflow:hidden}.chart-bar-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:shimmer 2s infinite}@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}.activity-feed{max-height:400px;overflow-y:auto}.activity-item{background:#fff;padding:15px;border-radius:8px;margin-bottom:10px;border-left:4px solid #667eea;transition:all .3s ease}.activity-item:hover{transform:translateX(5px);box-shadow:0 2px 8px rgba(0,0,0,.1)}.activity-item .activity-time{font-size:11px;color:#999;margin-bottom:5px}.activity-item .activity-desc{font-size:14px;color:#333}.admin-tabs{display:flex;gap:10px;margin-bottom:20px;border-bottom:2px solid #e0e0e0;flex-wrap:wrap}.admin-tab{padding:12px 24px;background:transparent;border:none;border-bottom:3px solid transparent;font-family:'Kanit',sans-serif;font-size:15px;font-weight:500;color:#666;cursor:pointer;transition:all .3s ease}.admin-tab:hover{color:#667eea}.admin-tab.active{color:#667eea;border-bottom-color:#667eea}.tab-content{display:none}.tab-content.active{display:block;animation:fadeIn .3s ease-out}.lock-item{background:#e3f2fd;padding:15px;border-radius:8px;margin-bottom:10px;border-left:4px solid #2196f3}.lock-item h4{color:#1565c0;font-size:16px;margin-bottom:8px}.lock-item p{font-size:13px;color:#666;margin:4px 0}.lock-item button{width:auto;padding:8px 16px;font-size:13px;margin-top:8px}.dashboard-quick-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:30px}.quick-stat-card{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:25px;border-radius:15px;text-align:center;box-shadow:0 4px 15px rgba(102,126,234,0.3);transition:all 0.3s ease}.quick-stat-card:hover{transform:translateY(-5px);box-shadow:0 8px 25px rgba(102,126,234,0.4)}.quick-stat-card.stat-success{background:linear-gradient(135deg,#56ab2f 0%,#a8e063 100%)}.quick-stat-card.stat-warning{background:linear-gradient(135deg,#f2994a 0%,#f2c94c 100%)}.quick-stat-card.stat-danger{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)}.quick-stat-card.stat-info{background:linear-gradient(135deg,#2196f3 0%,#1976d2 100%)}.quick-stat-card .icon{font-size:32px;margin-bottom:10px}.quick-stat-card .number{font-size:36px;font-weight:700;margin:10px 0}.quick-stat-card .label{font-size:14px;opacity:0.95}.export-section{background:#fff;padding:25px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin-bottom:20px}.export-controls{display:flex;gap:15px;flex-wrap:wrap;align-items:flex-end;margin-bottom:20px}.export-controls .form-group{flex:1;min-width:200px;margin-bottom:0}.export-btn{padding:12px 24px;background:linear-gradient(135deg,#56ab2f 0%,#a8e063 100%);color:#fff;border:none;border-radius:10px;font-family:'Kanit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;box-shadow:0 4px 15px rgba(86,171,47,0.3);width:auto;margin:0}.export-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 25px rgba(86,171,47,0.4)}.export-btn:disabled{opacity:0.6;cursor:not-allowed}.search-section{background:#fff;padding:25px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.1);margin-bottom:20px}.search-controls{display:flex;gap:15px;flex-wrap:wrap;align-items:flex-end}.search-controls .form-group{flex:1;min-width:200px;margin-bottom:0}.search-btn{padding:12px 24px;background:linear-gradient(135deg,#2196f3 0%,#1976d2 100%);color:#fff;border:none;border-radius:10px;font-family:'Kanit',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.3s ease;white-space:nowrap;box-shadow:0 4px 15px rgba(33,150,243,0.3);width:auto;margin:0}.search-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 25px rgba(33,150,243,0.4)}.clear-search-btn{background:linear-gradient(135deg,#9e9e9e 0%,#757575 100%);box-shadow:0 4px 15px rgba(158,158,158,0.3)}.search-results-header{background:#e3f2fd;padding:15px 20px;border-radius:10px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.search-results-header .result-count{font-size:16px;font-weight:600;color:#1565c0}.action-buttons-group{display:flex;gap:10px;flex-wrap:wrap}.action-buttons-group button{flex:1;min-width:120px;padding:10px 16px;font-size:14px;margin:0}.export-result-message{background:#e8f5e9;border-left:4px solid #4caf50;padding:15px 20px;border-radius:8px;margin-top:15px}.export-result-message h4{color:#2e7d32;font-size:16px;margin-bottom:10px}.export-result-message p{color:#1b5e20;font-size:14px;margin:5px 0}.export-download-link{display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#2196f3 0%,#1976d2 100%);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;margin-top:10px;transition:all 0.3s ease}.export-download-link:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(33,150,243,0.4)}@media (max-width: 768px){.main-container{flex-direction:column}.top-row{flex-direction:column}.booking-container,.my-bookings-container,.schedule-container-full{max-width:none}.form-row{flex-direction:column;gap:0}.user-info{position:relative;top:0;right:0;margin-bottom:20px;justify-content:center}.login-container{margin:50px auto;padding:40px 30px}.stats-grid{grid-template-columns:1fr}.modal-content{padding:30px}.checkin-hero{padding:30px 20px}.checkin-hero h1{font-size:28px}.checkin-input-large{font-size:22px;padding:15px 20px;letter-spacing:5px}.checkin-buttons{flex-direction:column}.checkin-buttons button{padding:15px}.admin-tabs{overflow-x:auto}.chart-container{padding:15px}.export-controls,.search-controls{flex-direction:column}.export-controls .form-group,.search-controls .form-group{width:100%}.export-btn,.search-btn,.clear-search-btn{width:100%}.dashboard-quick-stats{grid-template-columns:1fr}.action-buttons-group{flex-direction:column}.action-buttons-group button{width:100%}}
+  </style>
+</head><body>
+
+<!-- LOGIN PAGE -->
+  <div class="login-container" id="loginPage">
+    <div class="login-logo">🏢</div>
+    <h1 class="login-title">ระบบจองห้องประชุม<br>YUNGS!XX</h1>
+    <p class="login-subtitle">กรุณาเข้าสู่ระบบ</p>
+    <form id="loginForm" class="login-form">
+      <div class="form-group">
+        <label for="loginEmail">อีเมล</label>
+        <input type="email" id="loginEmail" required placeholder="example@kkumail.com">
+      </div>
+      <div class="form-group" id="passwordGroup">
+        <label for="loginPassword">รหัสผ่าน</label>
+        <input type="password" id="loginPassword" placeholder="รหัสผ่านสำหรับ Admin">
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn">เข้าสู่ระบบ</button>
+    </form>
+    <div class="login-note">📌 <strong>หมายเหตุ:</strong> สามารถใช้งานได้เฉพาะอีเมล @kkumail.com และ @kku.ac.th เท่านั้น</div>
+    <div id="loginMessage" class="message"></div>
+  </div>
+
+  <!-- USER INFO BAR -->
+  <div class="user-info" id="userInfo">
+    <span class="user-badge" id="userBadge"></span>
+    <span class="user-email" id="userEmail"></span>
+    <button class="logout-btn" id="logoutBtn">ออกจากระบบ</button>
+  </div>
+
+  <!-- RULES MODAL -->
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>⚠️ กฎการจองห้องประชุม</h2>
+        <p style="color:#666;font-size:14px;">กรุณาอ่านและทำความเข้าใจก่อนทำการจอง</p>
+      </div>
+      <div class="modal-body">
+        <div class="rule-list">
+          <h3>📋 ข้อกำหนดการจอง</h3>
+          <ul>
+            <li>จองได้เพียง <strong>1 ครั้งต่อวันเท่านั้น</strong></li>
+            <li>จองได้สูงสุด <strong>3 ชั่วโมงต่อครั้ง</strong></li>
+            <li>เวลาจอง: <strong>08:00 - 16:00 น.</strong></li>
+            <li>แก้ไขการจองได้สูงสุด <strong>2 ครั้งเท่านั้น</strong> (ห้อง และ/หรือ เวลา)</li>
+            <li><strong>Check-in ภายใน 15 นาที</strong> หลังเวลาเริ่มจอง</li>
+            <li><strong style="color:#dc2743;">ไม่ Check-in ภายใน 15 นาที = ยกเลิกอัตโนมัติ</strong></li>
+            <li>ต้อง <strong>Check-out</strong> เมื่อใช้เสร็จ</li>
+            <li>ระบบจะ <strong>แจ้งเตือนก่อนหมดเวลา 5 นาที</strong></li>
+            <li>ระบบจะ <strong>Auto Check-out</strong> เมื่อหมดเวลา</li>
+            <li>หากต้องการยกเลิก ลบได้ในหน้า <strong>"การจองของฉัน"</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn" id="closeModalBtn">รับทราบและเริ่มใช้งาน</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT BOOKING MODAL -->
+  <div class="modal-overlay" id="editBookingModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>📝 แก้ไขการจองห้องประชุม</h2>
+        <p style="color:#666;font-size:14px;">แก้ไขห้องและ/หรือเวลาได้ (สูงสุด 2 ครั้ง)</p>
+      </div>
+      <div class="modal-body">
+        <div id="editBookingInfo" style="background:#f8f9fa;padding:15px;border-radius:10px;margin-bottom:20px;"></div>
+        
+        <div class="form-group">
+          <label for="editRoomSelect">เลือกห้องประชุม <span style="color:#667eea;">*</span></label>
+          <select id="editRoomSelect" class="modal-select" required>
+            <option value="">-- เลือกห้อง --</option>
+            <option value="ห้อง 1 (ชั้น 1)">ห้อง 1 (ชั้น 1)</option>
+            <option value="ห้อง 2 (ชั้น 1)">ห้อง 2 (ชั้น 1)</option>
+            <option value="ห้อง 3 (ชั้น 1)">ห้อง 3 (ชั้น 1)</option>
+            <option value="ห้อง 4 (ชั้น 1)">ห้อง 4 (ชั้น 1)</option>
+            <option value="ห้อง 5 (ชั้น 1)">ห้อง 5 (ชั้น 1)</option>
+            <option value="ห้อง 6 (ชั้น 1)">ห้อง 6 (ชั้น 1)</option>
+            <option value="ห้อง 1 (ชั้นใต้ดิน)">ห้อง 1 (ชั้นใต้ดิน)</option>
+            <option value="ห้อง 2 (ชั้นใต้ดิน)">ห้อง 2 (ชั้นใต้ดิน)</option>
+            <option value="ห้อง 3 (ชั้นใต้ดิน)">ห้อง 3 (ชั้นใต้ดิน)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="editStartTimeSelect">เวลาเริ่มจอง <span style="color:#667eea;">*</span></label>
+            <select id="editStartTimeSelect" class="modal-select" required>
+              <option value="">-- เลือกเวลาเริ่ม --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editEndTimeSelect">เวลาสิ้นสุด <span style="color:#667eea;">*</span></label>
+            <select id="editEndTimeSelect" class="modal-select" required>
+              <option value="">-- เลือกเวลาสิ้นสุด --</option>
+            </select>
+          </div>
+        </div>
+        
+        <div style="background:#fff3cd;padding:15px;border-radius:8px;border-left:4px solid #ffc107;margin-top:15px;">
+          <p style="margin:0;color:#856404;font-size:13px;">
+            ⚠️ <strong>หมายเหตุ:</strong><br>
+            • แก้ไขได้เฉพาะก่อน Check-in<br>
+            • รหัส Check-in เดิมยังใช้ได้<br>
+            • แก้ไขได้สูงสุด 2 ครั้งเท่านั้น<br>
+            • จะส่งอีเมลแจ้งเตือนการเปลี่ยนแปลง
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="button-group">
+          <button class="modal-btn" id="confirmEditBookingBtn">บันทึกการแก้ไข</button>
+          <button class="modal-btn btn-danger" id="cancelEditBookingBtn">ยกเลิก</button>
+        </div>
+      </div>
+      <div id="editBookingMessage" class="message" style="margin-top:15px;"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN EDIT BOOKING MODAL -->
+  <div class="modal-overlay" id="adminEditModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>🔧 Admin: แก้ไขการจอง</h2>
+        <p style="color:#666;font-size:14px;">แก้ไขการจองของผู้ใช้</p>
+      </div>
+      <div class="modal-body">
+        <div id="adminEditInfo" style="background:#f8f9fa;padding:15px;border-radius:10px;margin-bottom:20px;"></div>
+        
+        <div class="form-group">
+          <label for="adminEditRoomSelect">เลือกห้องประชุม <span style="color:#667eea;">*</span></label>
+          <select id="adminEditRoomSelect" class="modal-select" required>
+            <option value="">-- เลือกห้อง --</option>
+            <option value="ห้อง 1 (ชั้น 1)">ห้อง 1 (ชั้น 1)</option>
+            <option value="ห้อง 2 (ชั้น 1)">ห้อง 2 (ชั้น 1)</option>
+            <option value="ห้อง 3 (ชั้น 1)">ห้อง 3 (ชั้น 1)</option>
+            <option value="ห้อง 4 (ชั้น 1)">ห้อง 4 (ชั้น 1)</option>
+            <option value="ห้อง 5 (ชั้น 1)">ห้อง 5 (ชั้น 1)</option>
+            <option value="ห้อง 6 (ชั้น 1)">ห้อง 6 (ชั้น 1)</option>
+            <option value="ห้อง 1 (ชั้นใต้ดิน)">ห้อง 1 (ชั้นใต้ดิน)</option>
+            <option value="ห้อง 2 (ชั้นใต้ดิน)">ห้อง 2 (ชั้นใต้ดิน)</option>
+            <option value="ห้อง 3 (ชั้นใต้ดิน)">ห้อง 3 (ชั้นใต้ดิน)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="adminEditDate">วันที่ <span style="color:#667eea;">*</span></label>
+          <input type="date" id="adminEditDate" class="modal-select" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="adminEditStartTime">เวลาเริ่มจอง <span style="color:#667eea;">*</span></label>
+            <select id="adminEditStartTime" class="modal-select" required>
+              <option value="">-- เลือกเวลาเริ่ม --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="adminEditEndTime">เวลาสิ้นสุด <span style="color:#667eea;">*</span></label>
+            <select id="adminEditEndTime" class="modal-select" required>
+              <option value="">-- เลือกเวลาสิ้นสุด --</option>
+            </select>
+          </div>
+        </div>
+        
+        <div style="background:#e3f2fd;padding:15px;border-radius:8px;border-left:4px solid #2196f3;margin-top:15px;">
+          <p style="margin:0;color:#1565c0;font-size:13px;">
+            ℹ️ <strong>หมายเหตุ:</strong><br>
+            • Admin สามารถแก้ไขได้ไม่จำกัด<br>
+            • จะส่งอีเมลแจ้งเตือนผู้ใช้อัตโนมัติ<br>
+            • รหัส Check-in เดิมยังใช้ได้
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="button-group">
+          <button class="modal-btn" id="confirmAdminEditBtn">บันทึกการแก้ไข</button>
+          <button class="modal-btn btn-danger" id="cancelAdminEditBtn">ยกเลิก</button>
+        </div>
+      </div>
+      <div id="adminEditMessage" class="message" style="margin-top:15px;"></div>
+    </div>
+  </div>
+
+  <!-- LOCK ROOM MODAL -->
+  <div class="modal-overlay" id="lockRoomModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>🔒 ล็อคห้องประชุม</h2>
+        <p style="color:#666;font-size:14px;">ล็อคห้องเพื่อใช้ในงานพิเศษ</p>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="lockRoomSelect">เลือกห้องประชุม <span style="color:#667eea;">*</span></label>
+          <select id="lockRoomSelect" class="modal-select" required>
+            <option value="">-- เลือกห้อง --</option>
+            <option value="ห้อง 1 (ชั้น 1)">ห้อง 1 (ชั้น 1)</option>
+            <option value="ห้อง 2 (ชั้น 1)">ห้อง 2 (ชั้น 1)</option>
+            <option value="ห้อง 3 (ชั้น 1)">ห้อง 3 (ชั้น 1)</option>
+            <option value="ห้อง 4 (ชั้น 1)">ห้อง 4 (ชั้น 1)</option>
+            <option value="ห้อง 5 (ชั้น 1)">ห้อง 5 (ชั้น 1)</option>
+            <option value="ห้อง 6 (ชั้น 1)">ห้อง 6 (ชั้น 1)</option>
+            <option value="ห้อง 1 (ชั้นใต้ดิน)">ห้อง 1 (ชั้นใต้ดิน)</option>
+            <option value="ห้อง 2 (ชั้นใต้ดิน)">ห้อง 2 (ชั้นใต้ดิน)</option>
+            <option value="ห้อง 3 (ชั้นใต้ดิน)">ห้อง 3 (ชั้นใต้ดิน)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lockStartDate">วันที่เริ่มล็อค <span style="color:#667eea;">*</span></label>
+            <input type="date" id="lockStartDate" class="modal-select" required>
+          </div>
+          <div class="form-group">
+            <label for="lockEndDate">วันที่สิ้นสุดล็อค <span style="color:#667eea;">*</span></label>
+            <input type="date" id="lockEndDate" class="modal-select" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="lockStartTime">เวลาเริ่ม</label>
+            <input type="time" id="lockStartTime" class="modal-select" value="08:00">
+          </div>
+          <div class="form-group">
+            <label for="lockEndTime">เวลาสิ้นสุด</label>
+            <input type="time" id="lockEndTime" class="modal-select" value="16:00">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lockReason">เหตุผลในการล็อค <span style="color:#667eea;">*</span></label>
+          <textarea id="lockReason" class="modal-select" placeholder="ระบุเหตุผล เช่น ใช้สำหรับงานสัมมนา" required></textarea>
+        </div>
+        
+        <div style="background:#fff3cd;padding:15px;border-radius:8px;border-left:4px solid #ffc107;margin-top:15px;">
+          <p style="margin:0;color:#856404;font-size:13px;">
+            ⚠️ <strong>หมายเหตุ:</strong><br>
+            • ห้องที่ล็อคจะไม่สามารถจองได้<br>
+            • จะแสดงในตารางว่า "ล็อคไว้"<br>
+            • สามารถปลดล็อคได้ในหน้า Dashboard
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="button-group">
+          <button class="modal-btn" id="confirmLockRoomBtn">🔒 ล็อคห้อง</button>
+          <button class="modal-btn btn-danger" id="cancelLockRoomBtn">ยกเลิก</button>
+        </div>
+      </div>
+      <div id="lockRoomMessage" class="message" style="margin-top:15px;"></div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER (USER) -->
+  <div class="main-container" id="mainContainer">
+    <!-- CHECK-IN SECTION -->
+    <div class="checkin-hero">
+      <h1>🔐 Check-in / Check-out</h1>
+      <p>กรอกรหัสที่ได้รับทางอีเมล เพื่อ Check-in หรือ Check-out</p>
+      <div class="checkin-input-group">
+        <input type="text" id="checkinCodeInput" class="checkin-input-large" maxlength="6" placeholder="A1B2C3" autocomplete="off">
+        <div class="checkin-buttons">
+          <button type="button" id="checkinBtn" class="btn-checkin">✓ Check-in</button>
+          <button type="button" id="checkoutBtn" class="btn-checkout">✓ Check-out</button>
+        </div>
+      </div>
+      <div class="checkin-info-box">
+        <h3>📱 วิธีใช้งาน</h3>
+        <ul>
+          <li>✉️ รับรหัส 6 หลักทางอีเมล</li>
+          <li>⏰ Check-in ภายใน 15 นาทีหลังเวลาเริ่ม</li>
+          <li>❌ ไม่ Check-in ภายใน 15 นาที = ยกเลิกอัตโนมัติ</li>
+          <li>✅ Check-out เมื่อใช้เสร็จ</li>
+          <li>🔔 รับแจ้งเตือนก่อนหมดเวลา 5 นาที</li>
+          <li>🤖 Auto Check-out เมื่อหมดเวลา</li>
+        </ul>
+      </div>
+      <div id="checkinMessage" class="message"></div>
+    </div>
+
+    <div class="top-row">
+      <!-- BOOKING FORM -->
+      <div class="booking-container">
+        <h1>จองห้องประชุม</h1>
+        <div class="booking-notice">
+          <h3>📋 กฎการจองห้อง</h3>
+          <ul>
+            <li>จองได้เพียง <strong>1 ครั้งต่อวัน</strong></li>
+            <li>จองได้สูงสุด <strong>3 ชั่วโมงต่อครั้ง</strong></li>
+            <li>เวลาจอง: 08:00 - 16:00 น.</li>
+            <li>แก้ไขได้สูงสุด <strong>2 ครั้ง</strong> (ก่อน Check-in)</li>
+            <li><strong style="color:#dc2743;">Check-in ภายใน 15 นาที หรือถูกยกเลิก</strong></li>
+          </ul>
+        </div>
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="room">เลือกห้องประชุม <span>*</span></label>
+            <select id="room" required>
+              <option value="">-- กรุณาเลือกห้อง --</option>
+              <option value="ห้อง 1 (ชั้น 1)">ห้อง 1 (ชั้น 1)</option>
+              <option value="ห้อง 2 (ชั้น 1)">ห้อง 2 (ชั้น 1)</option>
+              <option value="ห้อง 3 (ชั้น 1)">ห้อง 3 (ชั้น 1)</option>
+              <option value="ห้อง 4 (ชั้น 1)">ห้อง 4 (ชั้น 1)</option>
+              <option value="ห้อง 5 (ชั้น 1)">ห้อง 5 (ชั้น 1)</option>
+              <option value="ห้อง 6 (ชั้น 1)">ห้อง 6 (ชั้น 1)</option>
+              <option value="ห้อง 1 (ชั้นใต้ดิน)">ห้อง 1 (ชั้นใต้ดิน)</option>
+              <option value="ห้อง 2 (ชั้นใต้ดิน)">ห้อง 2 (ชั้นใต้ดิน)</option>
+              <option value="ห้อง 3 (ชั้นใต้ดิน)">ห้อง 3 (ชั้นใต้ดิน)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">วันที่ต้องการจอง <span>*</span></label>
+            <input type="date" id="date" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="startTime">เวลาเริ่มจอง <span>*</span></label>
+              <select id="startTime" required disabled>
+                <option value="">-- กรุณาเลือกห้องและวันที่ก่อน --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="endTime">เวลาสิ้นสุด <span>*</span></label>
+              <select id="endTime" required disabled>
+                <option value="">-- กรุณาเลือกเวลาเริ่มก่อน --</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="name">ชื่อผู้จอง <span>*</span></label>
+            <input type="text" id="name" required placeholder="กรอกชื่อ-นามสกุล">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="department">สาขาวิชา <span>*</span></label>
+              <input type="text" id="department" required placeholder="เช่น วิศวกรรมคอมพิวเตอร์">
+            </div>
+            <div class="form-group">
+              <label for="studentId">รหัสนักศึกษา <span>*</span></label>
+              <input type="text" id="studentId" required placeholder="เช่น 65010001">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">เบอร์ติดต่อกลับ <span>*</span></label>
+            <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="0812345678">
+          </div>
+          <button type="submit" id="submitBtn">บันทึกการจอง</button>
+        </form>
+        <div class="loading"><div class="spinner"></div><p>กำลังประมวลผล...</p></div>
+        <div id="message" class="message"></div>
+      </div>
+
+      <!-- MY BOOKINGS -->
+      <div class="my-bookings-container">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+          <h2 style="margin:0;">การจองของฉัน</h2>
+          <button type="button" onclick="loadMyBookings()" style="width:auto;padding:8px 16px;font-size:14px;margin:0;">
+            🔄 รีเฟรช
+          </button>
+        </div>
+        <div id="myBookingsList"></div>
+      </div>
+    </div>
+
+    <!-- SCHEDULE TABLE -->
+    <div class="schedule-container-full">
+      <h2>ตารางแสดงห้องว่าง</h2>
+      
+      <div style="background:#e3f2fd;padding:12px 20px;border-radius:10px;margin-bottom:20px;border-left:4px solid #2196f3;">
+        <p style="margin:0;color:#1565c0;font-size:14px;">
+          💡 <strong>เคล็ดลับ:</strong> คลิกที่ช่อง <span style="background:#e8f5e8;color:#2e7d32;padding:2px 8px;border-radius:4px;font-weight:600;">ว่าง</span> เพื่อจองห้องได้ทันที!
+        </p>
+      </div>
+      
+      <div class="schedule-controls">
+        <input type="date" id="scheduleDate">
+        <button type="button" id="loadScheduleBtn">แสดงตาราง</button>
+      </div>
+      <div class="schedule-table">
+        <table>
+          <thead>
+            <tr>
+              <th>เวลา</th>
+              <th>ห้อง 1<br>(ชั้น 1)</th>
+              <th>ห้อง 2<br>(ชั้น 1)</th>
+              <th>ห้อง 3<br>(ชั้น 1)</th>
+              <th>ห้อง 4<br>(ชั้น 1)</th>
+              <th>ห้อง 5<br>(ชั้น 1)</th>
+              <th>ห้อง 6<br>(ชั้น 1)</th>
+              <th>ห้อง 1<br>(ใต้ดิน)</th>
+              <th>ห้อง 2<br>(ใต้ดิน)</th>
+              <th>ห้อง 3<br>(ใต้ดิน)</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody">
+            <tr><td colspan="10" style="text-align:center;padding:30px;color:#666;">กรุณาเลือกวันที่เพื่อดูตารางห้องว่าง</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- ADMIN DASHBOARD -->
+  <div class="admin-dashboard" id="adminDashboard">
+    <h1>🎯 Admin Dashboard</h1>
+    
+    <!-- ADMIN TABS -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="overview">📊 ภาพรวม</button>
+      <button class="admin-tab" data-tab="bookings">📋 การจองทั้งหมด</button>
+      <button class="admin-tab" data-tab="checkins">✅ Check-in วันนี้</button>
+      <button class="admin-tab" data-tab="locks">🔒 ล็อคห้อง</button>
+      <button class="admin-tab" data-tab="analytics">📈 สถิติ</button>
+      <button class="admin-tab" data-tab="export">💾 Export รายงาน</button>
+    </div>
+
+    <!-- TAB: OVERVIEW -->
+    <div class="tab-content active" id="overviewTab">
+      <!-- Quick Stats Today -->
+      <h2 style="margin-bottom:20px;">📅 สรุปวันนี้</h2>
+      <div class="dashboard-quick-stats">
+        <div class="quick-stat-card stat-info">
+          <div class="icon">📋</div>
+          <div class="number" id="quickTotalToday">0</div>
+          <div class="label">การจองวันนี้</div>
+        </div>
+        <div class="quick-stat-card stat-warning">
+          <div class="icon">⏳</div>
+          <div class="number" id="quickWaitingCheckin">0</div>
+          <div class="label">รอ Check-in</div>
+        </div>
+        <div class="quick-stat-card stat-success">
+          <div class="icon">✅</div>
+          <div class="number" id="quickCheckedInToday">0</div>
+          <div class="label">กำลังใช้งาน</div>
+        </div>
+        <div class="quick-stat-card">
+          <div class="icon">🏁</div>
+          <div class="number" id="quickCompletedToday">0</div>
+          <div class="label">เสร็จสิ้นวันนี้</div>
+        </div>
+        <div class="quick-stat-card stat-danger">
+          <div class="icon">❌</div>
+          <div class="number" id="quickCancelledToday">0</div>
+          <div class="label">ยกเลิกวันนี้</div>
+        </div>
+      </div>
+
+      <!-- Overall Stats -->
+      <h2 style="margin-bottom:20px;margin-top:30px;">📊 สถิติรวม</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><h3>การจองทั้งหมด</h3><div class="number" id="totalBookings">0</div></div>
+        <div class="stat-card"><h3>กำลังใช้งาน</h3><div class="number" id="activeBookings">0</div></div>
+        <div class="stat-card"><h3>เสร็จสิ้นแล้ว</h3><div class="number" id="completedBookings">0</div></div>
+        <div class="stat-card"><h3>ถูกยกเลิก</h3><div class="number" id="cancelledBookings">0</div></div>
+        <div class="stat-card"><h3>การจองสัปดาห์นี้</h3><div class="number" id="weekBookings">0</div></div>
+        <div class="stat-card"><h3>การจองเดือนนี้</h3><div class="number" id="monthBookings">0</div></div>
+        <div class="stat-card"><h3>ผู้ใช้งานทั้งหมด</h3><div class="number" id="totalUsers">0</div></div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="admin-section">
+        <h2>🕐 กิจกรรมล่าสุด</h2>
+        <div id="recentActivity" class="activity-feed"></div>
+      </div>
+    </div>
+
+    <!-- TAB: BOOKINGS -->
+    <div class="tab-content" id="bookingsTab">
+      <!-- Search Section -->
+      <div class="search-section">
+        <h2>🔍 ค้นหาการจอง</h2>
+        <div class="search-controls">
+          <div class="form-group">
+            <label for="searchType">ค้นหาจาก</label>
+            <select id="searchType" class="modal-select">
+              <option value="all">ทั้งหมด</option>
+              <option value="name">ชื่อผู้จอง</option>
+              <option value="email">อีเมล</option>
+              <option value="room">ห้องประชุม</option>
+              <option value="studentId">รหัสนักศึกษา</option>
+              <option value="checkinCode">รหัส Check-in</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="searchTerm">คำค้นหา</label>
+            <input type="text" id="searchTerm" class="modal-select" placeholder="พิมพ์คำค้นหา...">
+          </div>
+          <button type="button" class="search-btn" onclick="searchBookings()">🔍 ค้นหา</button>
+          <button type="button" class="search-btn clear-search-btn" onclick="clearSearch()">✕ ล้าง</button>
+        </div>
+      </div>
+
+      <!-- All Bookings -->
+      <div class="admin-section">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+          <h2 style="margin:0;">📋 จัดการการจองทั้งหมด</h2>
+          <button type="button" onclick="loadAdminDashboard()" style="width:auto;padding:10px 20px;font-size:14px;margin:0;">
+            🔄 รีเฟรช
+          </button>
+        </div>
+        <div id="searchResultsHeader" style="display:none;"></div>
+        <div id="allBookingsList"></div>
+      </div>
+    </div>
+
+    <!-- TAB: CHECKINS -->
+    <div class="tab-content" id="checkinsTab">
+      <div class="admin-section">
+        <h2>🎯 การ Check-in วันนี้</h2>
+        <div id="todayCheckinsList"></div>
+      </div>
+    </div>
+
+    <!-- TAB: LOCKS -->
+    <div class="tab-content" id="locksTab">
+      <div class="admin-section">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+          <h2 style="margin:0;">🔒 จัดการล็อคห้อง</h2>
+          <button type="button" onclick="openLockRoomModal()" class="btn-warning" style="width:auto;padding:10px 20px;font-size:14px;margin:0;">
+            ➕ เพิ่มล็อคห้อง
+          </button>
+        </div>
+        <div id="roomLocksList"></div>
+      </div>
+    </div>
+
+    <!-- TAB: ANALYTICS -->
+    <div class="tab-content" id="analyticsTab">
+      <div class="admin-section">
+        <h2>📈 การใช้งานห้องประชุม</h2>
+        <div class="chart-container">
+          <div class="chart-title">จำนวนการจองแต่ละห้อง</div>
+          <div id="roomUsageChart"></div>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h2>⏰ ช่วงเวลาที่ได้รับความนิยม</h2>
+        <div class="chart-container">
+          <div class="chart-title">จำนวนการจองตามช่วงเวลา</div>
+          <div id="peakHoursChart"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: EXPORT -->
+    <div class="tab-content" id="exportTab">
+      <div class="export-section">
+        <h2>💾 Export รายงานการจอง</h2>
+        <p style="color:#666;margin-bottom:20px;">เลือกช่วงเวลาหรือประเภทการจองที่ต้องการ Export เป็นไฟล์ Excel</p>
+        
+        <div class="export-controls">
+          <div class="form-group">
+            <label for="exportType">ประเภทรายงาน</label>
+            <select id="exportType" class="modal-select">
+              <option value="all">ทั้งหมด</option>
+              <option value="today">วันนี้</option>
+              <option value="week">สัปดาห์นี้</option>
+              <option value="month">เดือนนี้</option>
+              <option value="daterange">กำหนดช่วงวันที่</option>
+              <option value="active">กำลังใช้งาน</option>
+              <option value="completed">เสร็จสิ้นแล้ว</option>
+              <option value="cancelled">ยกเลิก</option>
+            </select>
+          </div>
+          
+          <div class="form-group" id="exportDateRangeGroup" style="display:none;">
+            <label for="exportStartDate">จากวันที่</label>
+            <input type="date" id="exportStartDate" class="modal-select">
+          </div>
+          
+          <div class="form-group" id="exportDateRangeGroup2" style="display:none;">
+            <label for="exportEndDate">ถึงวันที่</label>
+            <input type="date" id="exportEndDate" class="modal-select">
+          </div>
+          
+          <button type="button" class="export-btn" onclick="exportToExcel()">
+            📥 Export Excel
+          </button>
+        </div>
+
+        <div id="exportResultMessage" style="display:none;"></div>
+      </div>
+
+      <!-- Export History -->
+      <div class="admin-section">
+        <h2>📋 คำแนะนำการใช้งาน</h2>
+        <div style="background:#f8f9fa;padding:20px;border-radius:10px;line-height:1.8;">
+          <h3 style="color:#667eea;margin-bottom:10px;">วิธีการ Export รายงาน:</h3>
+          <ol style="margin-left:20px;color:#666;">
+            <li>เลือก <strong>ประเภทรายงาน</strong> ที่ต้องการ</li>
+            <li>หากเลือก "กำหนดช่วงวันที่" ให้เลือกวันที่เริ่มต้นและสิ้นสุด</li>
+            <li>กดปุ่ม <strong>Export Excel</strong></li>
+            <li>รอระบบประมวลผล (อาจใช้เวลาสักครู่สำหรับข้อมูลจำนวนมาก)</li>
+            <li>คลิก <strong>Download</strong> เพื่อดาวน์โหลดไฟล์</li>
+          </ol>
+          
+          <h3 style="color:#667eea;margin:20px 0 10px 0;">ข้อมูลในรายงาน:</h3>
+          <ul style="margin-left:20px;color:#666;">
+            <li>ข้อมูลการจองทั้งหมดตามเงื่อนไข</li>
+            <li>สถานะ Check-in/Check-out</li>
+            <li>ข้อมูลผู้จอง (ชื่อ, อีเมล, เบอร์โทร)</li>
+            <li>รหัส Check-in</li>
+            <li>สรุปสถิติการจอง</li>
+          </ul>
+
+          <div style="background:#e3f2fd;padding:15px;border-radius:8px;border-left:4px solid #2196f3;margin-top:15px;">
+            <p style="margin:0;color:#1565c0;font-size:14px;">
+              💡 <strong>Tips:</strong> ไฟล์ที่ Export จะถูกจัดรูปแบบพร้อมใช้งาน มีสีสลับแถว และสรุปข้อมูลด้านล่าง
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><script>
+    // ===============================================================================================
+    // JAVASCRIPT - Complete Implementation Rev14
+    // Part 1: Variables, Initialization & Event Listeners
+    // ===============================================================================================
+    
+    // ===============================
+    // GLOBAL VARIABLES
+    // ===============================
+    
+    let userLoggedIn = false;
+    let userEmail = '';
+    let userType = '';
+    let autoRefreshInterval = null;
+    let currentAdminEditBooking = null;
+    let currentEditBooking = null;
+    let isSearchMode = false;
+    
+    const allRooms = [
+      'ห้อง 1 (ชั้น 1)', 'ห้อง 2 (ชั้น 1)', 'ห้อง 3 (ชั้น 1)',
+      'ห้อง 4 (ชั้น 1)', 'ห้อง 5 (ชั้น 1)', 'ห้อง 6 (ชั้น 1)',
+      'ห้อง 1 (ชั้นใต้ดิน)', 'ห้อง 2 (ชั้นใต้ดิน)', 'ห้อง 3 (ชั้นใต้ดิน)'
+    ];
+    
+    const allTimes = [
+      '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', 
+      '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30'
+    ];
+
+    // ===============================
+    // INITIALIZATION
+    // ===============================
+
+    window.onload = function() {
+      const savedEmail = sessionStorage.getItem('userEmail');
+      const savedType = sessionStorage.getItem('userType');
+      
+      if (savedEmail && savedType) {
+        userEmail = savedEmail;
+        userType = savedType;
+        userLoggedIn = true;
+        showApp();
+      }
+      
+      const today = new Date();
+      const dd = String(today.getDate()).padStart(2, '0');
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const yyyy = today.getFullYear();
+      const todayStr = yyyy + '-' + mm + '-' + dd;
+      
+      document.getElementById('date').setAttribute('min', todayStr);
+      document.getElementById('scheduleDate').setAttribute('min', todayStr);
+      document.getElementById('scheduleDate').value = todayStr;
+      document.getElementById('lockStartDate').setAttribute('min', todayStr);
+      document.getElementById('lockEndDate').setAttribute('min', todayStr);
+      document.getElementById('adminEditDate').setAttribute('min', todayStr);
+      document.getElementById('exportStartDate').setAttribute('min', todayStr);
+      document.getElementById('exportEndDate').setAttribute('min', todayStr);
+      
+      if (userLoggedIn) {
+        loadSchedule();
+        if (userType === 'user' || userType === 'test') {
+          loadMyBookings();
+        } else if (userType === 'admin') {
+          loadAdminDashboard();
+          loadTodayCheckins();
+          loadRoomLocks();
+          loadDashboardAnalytics();
+          loadQuickStats();
+        }
+      }
+    };
+
+    // ===============================
+    // EVENT LISTENERS
+    // ===============================
+
+    document.getElementById('loginEmail').addEventListener('input', function() {
+      const email = this.value.toLowerCase().trim();
+      const passwordGroup = document.getElementById('passwordGroup');
+      
+      if (email === 'forworkyungsixx@gmail.com') {
+        passwordGroup.style.display = 'block';
+        document.getElementById('loginPassword').required = true;
+      } else {
+        passwordGroup.style.display = 'none';
+        document.getElementById('loginPassword').required = false;
+        document.getElementById('loginPassword').value = '';
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+    document.getElementById('room').addEventListener('change', function() {
+      updateAvailableSlots();
+      document.getElementById('endTime').value = '';
+      document.getElementById('submitBtn').disabled = true;
+    });
+
+    document.getElementById('date').addEventListener('change', function() {
+      updateAvailableSlots();
+      document.getElementById('endTime').value = '';
+      document.getElementById('submitBtn').disabled = true;
+    });
+
+    document.getElementById('startTime').addEventListener('change', function() {
+      updateEndTimeSlots();
+      document.getElementById('endTime').value = '';
+      document.getElementById('submitBtn').disabled = true;
+    });
+
+    document.getElementById('endTime').addEventListener('change', function() {
+      const room = document.getElementById('room').value;
+      const date = document.getElementById('date').value;
+      const startTime = document.getElementById('startTime').value;
+      const endTime = this.value;
+      
+      if (room && date && startTime && endTime) {
+        const submitBtn = document.getElementById('submitBtn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = '🔍 กำลังตรวจสอบเวลาว่าง...';
+        
+        google.script.run
+          .withSuccessHandler(function(isDuplicate) {
+            if (isDuplicate) {
+              showMessage('⚠️ เวลาที่เลือกมีคนจองไปแล้ว กรุณาเลือกเวลาอื่น', 'error');
+              document.getElementById('endTime').value = '';
+              submitBtn.disabled = true;
+              submitBtn.textContent = originalText;
+              
+              setTimeout(function() {
+                updateEndTimeSlots();
+                loadSchedule();
+              }, 500);
+            } else {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+              hideMessage();
+            }
+          })
+          .withFailureHandler(function(error) {
+            console.error('Error checking duplicate:', error);
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          })
+          .checkDuplicateBooking(date, room, startTime, endTime);
+      }
+    });
+
+    document.getElementById('bookingForm').addEventListener('submit', handleSubmit);
+    document.getElementById('loadScheduleBtn').addEventListener('click', loadSchedule);
+    document.getElementById('scheduleDate').addEventListener('change', loadSchedule);
+    
+    document.getElementById('closeModalBtn').addEventListener('click', function() {
+      document.getElementById('rulesModal').classList.remove('active');
+      sessionStorage.setItem('hasSeenRules', 'true');
+    });
+    
+    document.getElementById('checkinBtn').addEventListener('click', handleCheckIn);
+    document.getElementById('checkoutBtn').addEventListener('click', handleCheckOut);
+
+    document.getElementById('checkinCodeInput').addEventListener('input', function(e) {
+      e.target.value = e.target.value.toUpperCase();
+      if (e.target.value.length === 6) {
+        e.target.style.borderColor = '#4caf50';
+      } else {
+        e.target.style.borderColor = 'rgba(255,255,255,.3)';
+      }
+    });
+
+    // Export Type Change
+    document.getElementById('exportType').addEventListener('change', function() {
+      const dateRangeGroup = document.getElementById('exportDateRangeGroup');
+      const dateRangeGroup2 = document.getElementById('exportDateRangeGroup2');
+      
+      if (this.value === 'daterange') {
+        dateRangeGroup.style.display = 'block';
+        dateRangeGroup2.style.display = 'block';
+      } else {
+        dateRangeGroup.style.display = 'none';
+        dateRangeGroup2.style.display = 'none';
+      }
+    });
+
+    // Admin Tabs
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        this.classList.add('active');
+        const tabName = this.getAttribute('data-tab');
+        document.getElementById(tabName + 'Tab').classList.add('active');
+        
+        if (tabName === 'checkins') {
+          loadTodayCheckins();
+        } else if (tabName === 'locks') {
+          loadRoomLocks();
+        } else if (tabName === 'analytics') {
+          loadDashboardAnalytics();
+        } else if (tabName === 'bookings') {
+          if (isSearchMode) {
+            // Keep search results
+          } else {
+            loadAdminDashboard();
+          }
+        } else if (tabName === 'overview') {
+          loadDashboardAnalytics();
+          loadRecentActivity();
+          loadQuickStats();
+        }
+      });
+    });
+
+    // Lock Room Modal
+    document.getElementById('confirmLockRoomBtn').addEventListener('click', handleLockRoom);
+    document.getElementById('cancelLockRoomBtn').addEventListener('click', function() {
+      document.getElementById('lockRoomModal').classList.remove('active');
+    });
+
+    // Admin Edit Modal
+    document.getElementById('confirmAdminEditBtn').addEventListener('click', handleAdminEdit);
+    document.getElementById('cancelAdminEditBtn').addEventListener('click', function() {
+      document.getElementById('adminEditModal').classList.remove('active');
+      currentAdminEditBooking = null;
+    });
+
+    document.getElementById('adminEditRoomSelect').addEventListener('change', function() {
+      if (!currentAdminEditBooking) return;
+      loadAdminEditTimeSlots();
+    });
+
+    document.getElementById('adminEditDate').addEventListener('change', function() {
+      if (!currentAdminEditBooking) return;
+      loadAdminEditTimeSlots();
+    });
+
+    document.getElementById('adminEditStartTime').addEventListener('change', function() {
+      if (!currentAdminEditBooking) return;
+      loadAdminEditEndTimeSlots();
+    });
+
+    // Edit Booking Modal
+    document.getElementById('editRoomSelect').addEventListener('change', function() {
+      if (!currentEditBooking) return;
+      
+      const newRoom = this.value;
+      if (newRoom) {
+        loadEditTimeSlots(
+          currentEditBooking.date, 
+          newRoom, 
+          currentEditBooking.startTime, 
+          currentEditBooking.endTime
+        );
+      }
+    });
+    
+    document.getElementById('editStartTimeSelect').addEventListener('change', function() {
+      if (!currentEditBooking) return;
+      
+      const newStartTime = this.value;
+      const newRoom = document.getElementById('editRoomSelect').value;
+      
+      if (newStartTime && newRoom) {
+        loadEditEndTimeSlots(
+          currentEditBooking.date, 
+          newRoom, 
+          newStartTime, 
+          null
+        );
+      }
+    });
+    
+    document.getElementById('confirmEditBookingBtn').addEventListener('click', handleEditBooking);
+    document.getElementById('cancelEditBookingBtn').addEventListener('click', function() {
+      document.getElementById('editBookingModal').classList.remove('active');
+      currentEditBooking = null;
+    });
+
+    // ===============================
+    // UTILITY FUNCTIONS
+    // ===============================
+
+    function timeToMinutesClient(time) {
+      if (typeof time !== 'string') return 0;
+      const parts = time.split(':');
+      if (parts.length !== 2) return 0;
+      const hours = parseInt(parts[0], 10);
+      const minutes = parseInt(parts[1], 10);
+      if (isNaN(hours) || isNaN(minutes)) return 0;
+      return hours * 60 + minutes;
+    }
+
+    // ===============================
+    // AUTHENTICATION FUNCTIONS
+    // ===============================
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลังเข้าสู่ระบบ...';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            userEmail = email;
+            userType = result.userType;
+            userLoggedIn = true;
+            
+            sessionStorage.setItem('userEmail', email);
+            sessionStorage.setItem('userType', result.userType);
+            
+            showApp();
+            
+            if (!sessionStorage.getItem('hasSeenRules') && result.userType !== 'admin') {
+              setTimeout(function() {
+                document.getElementById('rulesModal').classList.add('active');
+              }, 500);
+            }
+          } else {
+            showLoginMessage(result.message, 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = 'เข้าสู่ระบบ';
+        })
+        .withFailureHandler(function(error) {
+          showLoginMessage('เกิดข้อผิดพลาด: ' + error.toString(), 'error');
+          btn.disabled = false;
+          btn.textContent = 'เข้าสู่ระบบ';
+        })
+        .validateLogin(email, password);
+    }
+
+    function handleLogout() {
+  if (confirm('ยืนยันการออกจากระบบ?')) {
+    // Clear session
+    sessionStorage.clear();
+    
+    // Reset all states
+    userLoggedIn = false;
+    userEmail = '';
+    userType = '';
+    
+    // Stop auto-refresh
+    if (autoRefreshInterval) {
+      clearInterval(autoRefreshInterval);
+      autoRefreshInterval = null;
+    }
+    
+    // Hide all containers
+    document.getElementById('mainContainer').classList.remove('active');
+    document.getElementById('adminDashboard').classList.remove('active');
+    document.getElementById('userInfo').classList.remove('active');
+    
+    // Reset and show login page
+    document.getElementById('loginPage').style.display = 'block';
+    document.getElementById('loginForm').reset();
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('passwordGroup').style.display = 'none';
+    
+    // Clear any messages
+    document.getElementById('loginMessage').style.display = 'none';
+  }
+}
+
+    function showApp() {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('userInfo').classList.add('active');
+      document.getElementById('userEmail').textContent = userEmail;
+      
+      const badge = document.getElementById('userBadge');
+      if (userType === 'admin') {
+        badge.textContent = 'ADMIN';
+        badge.className = 'user-badge badge-admin';
+        document.getElementById('adminDashboard').classList.add('active');
+        loadAdminDashboard();
+        loadTodayCheckins();
+        loadRoomLocks();
+        loadDashboardAnalytics();
+        loadRecentActivity();
+        loadQuickStats();
+      } else if (userType === 'test') {
+        badge.textContent = 'TEST USER';
+        badge.className = 'user-badge badge-test';
+        document.getElementById('mainContainer').classList.add('active');
+        loadMyBookings();
+      } else {
+        badge.textContent = 'USER';
+        badge.className = 'user-badge badge-user';
+        document.getElementById('mainContainer').classList.add('active');
+        loadMyBookings();
+      }
+      
+      loadSchedule();
+    }
+
+    function showLoginMessage(text, type) {
+      const messageDiv = document.getElementById('loginMessage');
+      messageDiv.textContent = text;
+      messageDiv.className = 'message ' + type;
+      messageDiv.style.display = 'block';
+      
+      setTimeout(function() {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    function showMessage(text, type) {
+      const messageDiv = document.getElementById('message');
+      messageDiv.textContent = text;
+      messageDiv.className = 'message ' + type;
+      messageDiv.style.display = 'block';
+      
+      setTimeout(function() {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    function hideMessage() {
+      document.getElementById('message').style.display = 'none';
+    }
+
+    function showCheckinMessage(text, type) {
+      const messageDiv = document.getElementById('checkinMessage');
+      messageDiv.textContent = text;
+      messageDiv.className = 'message ' + type;
+      messageDiv.style.display = 'block';
+      
+      setTimeout(function() {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    }// ===============================
+    // BOOKING FUNCTIONS
+    // ===============================
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      
+      const data = {
+        room: document.getElementById('room').value,
+        date: document.getElementById('date').value,
+        startTime: document.getElementById('startTime').value,
+        endTime: document.getElementById('endTime').value,
+        name: document.getElementById('name').value,
+        department: document.getElementById('department').value,
+        studentId: document.getElementById('studentId').value,
+        phone: document.getElementById('phone').value,
+        loginEmail: userEmail
+      };
+      
+      document.querySelector('.loading').style.display = 'block';
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          document.querySelector('.loading').style.display = 'none';
+          
+          if (result.success) {
+            showMessage(result.message, 'success');
+            document.getElementById('bookingForm').reset();
+            document.getElementById('startTime').disabled = true;
+            document.getElementById('endTime').disabled = true;
+            submitBtn.disabled = true;
+            
+            loadMyBookings();
+            loadSchedule();
+          } else {
+            showMessage(result.message, 'error');
+            submitBtn.disabled = false;
+          }
+        })
+        .withFailureHandler(function(error) {
+          document.querySelector('.loading').style.display = 'none';
+          showMessage('เกิดข้อผิดพลาด: ' + error.toString(), 'error');
+          submitBtn.disabled = false;
+        })
+        .saveReservation(data);
+    }
+
+    function updateAvailableSlots() {
+      const room = document.getElementById('room').value;
+      const date = document.getElementById('date').value;
+      const startTimeSelect = document.getElementById('startTime');
+      const endTimeSelect = document.getElementById('endTime');
+      
+      if (!room || !date) {
+        startTimeSelect.innerHTML = '<option value="">-- กรุณาเลือกห้องและวันที่ก่อน --</option>';
+        startTimeSelect.disabled = true;
+        endTimeSelect.innerHTML = '<option value="">-- กรุณาเลือกเวลาเริ่มก่อน --</option>';
+        endTimeSelect.disabled = true;
+        return;
+      }
+      
+      startTimeSelect.innerHTML = '<option value="">-- กำลังโหลด... --</option>';
+      startTimeSelect.disabled = true;
+      
+      google.script.run
+        .withSuccessHandler(function(availableSlots) {
+          startTimeSelect.innerHTML = '<option value="">-- เลือกเวลาเริ่ม --</option>';
+          
+          if (availableSlots.length > 0) {
+            for (let i = 0; i < availableSlots.length; i++) {
+              const option = document.createElement('option');
+              option.value = availableSlots[i];
+              option.textContent = availableSlots[i] + ' น.';
+              startTimeSelect.appendChild(option);
+            }
+            startTimeSelect.disabled = false;
+          } else {
+            startTimeSelect.innerHTML = '<option value="">-- ไม่มีเวลาว่าง --</option>';
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading slots:', error);
+          startTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+        })
+        .getAvailableTimeSlots(date, room);
+    }
+
+    function updateEndTimeSlots() {
+      const room = document.getElementById('room').value;
+      const date = document.getElementById('date').value;
+      const startTime = document.getElementById('startTime').value;
+      const endTimeSelect = document.getElementById('endTime');
+      
+      if (!startTime) {
+        endTimeSelect.innerHTML = '<option value="">-- กรุณาเลือกเวลาเริ่มก่อน --</option>';
+        endTimeSelect.disabled = true;
+        return;
+      }
+      
+      endTimeSelect.innerHTML = '<option value="">-- กำลังโหลด... --</option>';
+      endTimeSelect.disabled = true;
+      
+      google.script.run
+        .withSuccessHandler(function(availableEndTimes) {
+          endTimeSelect.innerHTML = '<option value="">-- เลือกเวลาสิ้นสุด --</option>';
+          
+          if (availableEndTimes.length > 0) {
+            for (let i = 0; i < availableEndTimes.length; i++) {
+              const option = document.createElement('option');
+              option.value = availableEndTimes[i];
+              option.textContent = availableEndTimes[i] + ' น.';
+              endTimeSelect.appendChild(option);
+            }
+            endTimeSelect.disabled = false;
+          } else {
+            endTimeSelect.innerHTML = '<option value="">-- ไม่มีเวลาว่าง --</option>';
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading end times:', error);
+          endTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+        })
+        .getAvailableEndTimes(date, room, startTime);
+    }
+
+    function loadMyBookings() {
+      google.script.run
+        .withSuccessHandler(function(reservations) {
+          displayMyBookings(reservations);
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading bookings:', error);
+        })
+        .getMyBookingsWithCheckin(userEmail);
+    }
+
+    function displayMyBookings(reservations) {
+      const container = document.getElementById('myBookingsList');
+      
+      if (reservations.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#666;padding:20px;">คุณยังไม่มีการจอง</p>';
+        return;
+      }
+      
+      let html = '';
+      reservations.forEach(function(booking) {
+        const checkedInClass = booking.isCheckedIn ? ' checked-in' : '';
+        const checkedOutClass = booking.isCheckedOut ? ' checked-out' : '';
+        
+        html += '<div class="booking-item' + checkedInClass + checkedOutClass + '">';
+        html += '<h4>' + booking.room + '</h4>';
+        html += '<p><strong>วันที่:</strong> ' + booking.date + '</p>';
+        html += '<p><strong>เวลา:</strong> ' + booking.startTime + ' - ' + booking.endTime + '</p>';
+        html += '<p><strong>ชื่อ:</strong> ' + booking.name + '</p>';
+        
+        if (booking.checkinCode) {
+          html += '<div class="booking-code-display">';
+          html += '<div class="code-label">รหัส Check-in</div>';
+          html += '<div class="code-value">' + booking.checkinCode + '</div>';
+          html += '</div>';
+        }
+        
+        if (booking.isCheckedIn) {
+          html += '<p style="color:#f57c00;font-weight:600;">✅ Check-in แล้ว: ' + booking.checkinTime + '</p>';
+        }
+        
+        if (booking.isCheckedOut) {
+          html += '<p style="color:#2e7d32;font-weight:600;">🏁 Check-out แล้ว: ' + booking.checkoutTime + '</p>';
+        }
+        
+        if (booking.editCount !== undefined) {
+          const remainingEdits = 2 - booking.editCount;
+          const badgeClass = remainingEdits === 0 ? 'edit-count-warning' : 'edit-count-badge';
+          html += '<span class="' + badgeClass + '">แก้ไขแล้ว ' + booking.editCount + '/2 ครั้ง</span>';
+        }
+        
+        if (!booking.isCheckedIn && !booking.isCheckedOut) {
+          html += '<div class="action-buttons-group">';
+          html += '<button class="delete-btn btn-edit" onclick="openEditBookingModal(' + booking.rowIndex + ',\'' + booking.room + '\',\'' + booking.date + '\',\'' + booking.startTime + '\',\'' + booking.endTime + '\',\'' + booking.email + '\',' + (booking.editCount || 0) + ')">✏️ แก้ไข</button>';
+          html += '<button class="delete-btn btn-danger" onclick="deleteBooking(' + booking.rowIndex + ',\'' + booking.email + '\')">🗑️ ยกเลิก</button>';
+          html += '</div>';
+        }
+        
+        html += '</div>';
+      });
+      
+      container.innerHTML = html;
+    }
+
+    function deleteBooking(rowIndex, reservationEmail) {
+      if (!confirm('คุณต้องการยกเลิกการจองนี้ใช่หรือไม่?')) return;
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            alert(result.message);
+            loadMyBookings();
+            loadSchedule();
+          } else {
+            alert(result.message);
+          }
+        })
+        .withFailureHandler(function(error) {
+          alert('เกิดข้อผิดพลาด: ' + error.toString());
+        })
+        .deleteReservation(rowIndex, userEmail, reservationEmail);
+    }
+
+    // ===============================
+    // CHECK-IN/CHECK-OUT FUNCTIONS
+    // ===============================
+
+    function handleCheckIn() {
+      const code = document.getElementById('checkinCodeInput').value.trim();
+      
+      if (!code || code.length !== 6) {
+        showCheckinMessage('กรุณากรอกรหัส Check-in 6 หลัก', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('checkinBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลัง Check-in...';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            showCheckinMessage('✅ ' + result.message, 'success');
+            document.getElementById('checkinCodeInput').value = '';
+            loadMyBookings();
+          } else {
+            showCheckinMessage('❌ ' + result.message, 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = '✓ Check-in';
+        })
+        .withFailureHandler(function(error) {
+          showCheckinMessage('❌ เกิดข้อผิดพลาด: ' + error.toString(), 'error');
+          btn.disabled = false;
+          btn.textContent = '✓ Check-in';
+        })
+        .checkIn(code, userEmail);
+    }
+
+    function handleCheckOut() {
+      const code = document.getElementById('checkinCodeInput').value.trim();
+      
+      if (!code || code.length !== 6) {
+        showCheckinMessage('กรุณากรอกรหัส Check-in 6 หลัก', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('checkoutBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลัง Check-out...';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            showCheckinMessage('✅ ' + result.message, 'success');
+            document.getElementById('checkinCodeInput').value = '';
+            loadMyBookings();
+          } else {
+            showCheckinMessage('❌ ' + result.message, 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = '✓ Check-out';
+        })
+        .withFailureHandler(function(error) {
+          showCheckinMessage('❌ เกิดข้อผิดพลาด: ' + error.toString(), 'error');
+          btn.disabled = false;
+          btn.textContent = '✓ Check-out';
+        })
+        .checkOut(code, userEmail);
+    }
+
+    // ===============================
+    // SCHEDULE TABLE FUNCTIONS
+    // ===============================
+
+    function loadSchedule() {
+      const date = document.getElementById('scheduleDate').value;
+      const scheduleBody = document.getElementById('scheduleBody');
+      
+      if (!date) {
+        scheduleBody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:30px;color:#666;">กรุณาเลือกวันที่เพื่อดูตารางห้องว่าง</td></tr>';
+        return;
+      }
+      
+      scheduleBody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:30px;color:#666;">กำลังโหลดข้อมูล...</td></tr>';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            generateScheduleTable(result.reservations, result.locks, date);
+          } else {
+            scheduleBody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:30px;color:#dc2743;">เกิดข้อผิดพลาด: ' + (result.error || 'ไม่สามารถโหลดข้อมูลได้') + '</td></tr>';
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading schedule:', error);
+          scheduleBody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:30px;color:#dc2743;">เกิดข้อผิดพลาดในการโหลดข้อมูล</td></tr>';
+        })
+        .getScheduleData(date);
+    }
+
+    function generateScheduleTable(reservations, locks, selectedDate) {
+      const scheduleBody = document.getElementById('scheduleBody');
+      let html = '';
+      
+      for (let i = 0; i < allTimes.length; i++) {
+        const time = allTimes[i];
+        const nextTime = i < allTimes.length - 1 ? allTimes[i + 1] : '16:00';
+        html += '<tr><td class="room-cell">' + time + ' - ' + nextTime + '</td>';
+        
+        for (let j = 0; j < allRooms.length; j++) {
+          const room = allRooms[j];
+          
+          let isLocked = false;
+          let lockReason = '';
+          
+          if (locks && locks.length > 0) {
+            for (let lock of locks) {
+              if (lock.room === room && selectedDate >= lock.startDate && selectedDate <= lock.endDate) {
+                const slotMinutes = timeToMinutesClient(time);
+                const lockStartMinutes = timeToMinutesClient(lock.startTime);
+                const lockEndMinutes = timeToMinutesClient(lock.endTime);
+                
+                if (slotMinutes >= lockStartMinutes && slotMinutes < lockEndMinutes) {
+                  isLocked = true;
+                  lockReason = lock.reason;
+                  break;
+                }
+              }
+            }
+          }
+          
+          if (isLocked) {
+            html += '<td class="locked"><div class="booking-info"><strong style="color:#1565c0;">🔒 ล็อคไว้</strong><br>' + lockReason + '</div></td>';
+            continue;
+          }
+          
+          let isBooked = false;
+          let bookingInfo = '';
+          let isUsing = false;
+          
+          if (reservations && reservations.length > 0) {
+            for (let k = 0; k < reservations.length; k++) {
+              const reservation = reservations[k];
+              if (reservation.room === room) {
+                const startMinutes = timeToMinutesClient(reservation.startTime);
+                const endMinutes = timeToMinutesClient(reservation.endTime);
+                const slotMinutes = timeToMinutesClient(time);
+                
+                if (slotMinutes >= startMinutes && slotMinutes < endMinutes) {
+                  if (reservation.isCheckedOut) { 
+                    continue; 
+                  }
+                  
+                  isBooked = true;
+                  if (reservation.isCheckedIn && !reservation.isCheckedOut) {
+                    isUsing = true;
+                    bookingInfo = '<div class="booking-info"><strong style="color:#f57c00;">🔸 กำลังใช้งาน</strong><br>' + reservation.name + '<br>' + reservation.startTime + '-' + reservation.endTime + '</div>';
+                  } else {
+                    bookingInfo = '<div class="booking-info">' + reservation.name + '<br>' + reservation.startTime + '-' + reservation.endTime + '</div>';
+                  }
+                  break;
+                }
+              }
+            }
+          }
+          
+          if (isUsing) {
+            html += '<td class="using">' + bookingInfo + '</td>';
+          } else if (isBooked) {
+            html += '<td class="booked">' + bookingInfo + '</td>';
+          } else {
+            html += '<td class="available" onclick="quickBook(\'' + room + '\',\'' + selectedDate + '\',\'' + time + '\',\'' + nextTime + '\')">ว่าง</td>';
+          }
+        }
+        html += '</tr>';
+      }
+      
+      scheduleBody.innerHTML = html;
+    }
+
+    function quickBook(room, date, startTime, endTime) {
+      if (!userLoggedIn) {
+        alert('❌ กรุณาเข้าสู่ระบบก่อนทำการจอง');
+        return;
+      }
+      
+      if (userType === 'admin') {
+        alert('⚠️ Admin ไม่สามารถจองห้องได้\nกรุณาใช้บัญชีผู้ใช้ทั่วไปในการจอง');
+        return;
+      }
+      
+      document.querySelector('.booking-container').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+      
+      document.getElementById('room').value = room;
+      document.getElementById('date').value = date;
+      
+      const startTimeSelect = document.getElementById('startTime');
+      const endTimeSelect = document.getElementById('endTime');
+      
+      startTimeSelect.innerHTML = '<option value="' + startTime + '">' + startTime + ' น.</option>';
+      startTimeSelect.value = startTime;
+      startTimeSelect.disabled = false;
+      
+      endTimeSelect.innerHTML = '<option value="">-- กำลังโหลดเวลาสิ้นสุด... --</option>';
+      endTimeSelect.disabled = true;
+      endTimeSelect.value = '';
+      
+      const bookingContainer = document.querySelector('.booking-container');
+      bookingContainer.style.animation = 'none';
+      setTimeout(function() {
+        bookingContainer.style.animation = 'pulseBooking 1s ease-in-out';
+      }, 10);
+      
+      showMessage('✅ เลือกห้อง "' + room + '" เวลาเริ่ม ' + startTime + '\n⏳ กำลังโหลดตัวเลือกเวลาสิ้นสุด...', 'success');
+      
+      setTimeout(function() {
+        google.script.run
+          .withSuccessHandler(function(availableSlots) {
+            startTimeSelect.innerHTML = '<option value="">-- เลือกเวลาเริ่ม --</option>';
+            
+            if (availableSlots.length > 0) {
+              for (let i = 0; i < availableSlots.length; i++) {
+                const option = document.createElement('option');
+                option.value = availableSlots[i];
+                option.textContent = availableSlots[i] + ' น.';
+                startTimeSelect.appendChild(option);
+              }
+              
+              if (availableSlots.includes(startTime)) {
+                startTimeSelect.value = startTime;
+                loadEndTimesForQuickBook(room, date, startTime);
+              } else {
+                showMessage('⚠️ เวลา ' + startTime + ' ถูกจองไปแล้ว กรุณาเลือกเวลาอื่น', 'error');
+                startTimeSelect.value = '';
+                endTimeSelect.innerHTML = '<option value="">-- กรุณาเลือกเวลาเริ่มก่อน --</option>';
+                endTimeSelect.disabled = true;
+              }
+            } else {
+              startTimeSelect.innerHTML = '<option value="">-- ไม่มีเวลาว่าง --</option>';
+              endTimeSelect.innerHTML = '<option value="">-- ไม่มีเวลาว่าง --</option>';
+              showMessage('⚠️ ห้องนี้ไม่มีเวลาว่างในวันที่เลือก', 'error');
+            }
+          })
+          .withFailureHandler(function(error) {
+            console.error('Error loading available slots:', error);
+            showMessage('❌ เกิดข้อผิดพลาดในการโหลดข้อมูล', 'error');
+            startTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+            endTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+          })
+          .getAvailableTimeSlots(date, room);
+      }, 500);
+    }
+
+    function loadEndTimesForQuickBook(room, date, startTime) {
+      const endTimeSelect = document.getElementById('endTime');
+      
+      google.script.run
+        .withSuccessHandler(function(availableEndTimes) {
+          endTimeSelect.innerHTML = '<option value="">-- เลือกเวลาสิ้นสุด --</option>';
+          
+          if (availableEndTimes.length > 0) {
+            for (let i = 0; i < availableEndTimes.length; i++) {
+              const option = document.createElement('option');
+              option.value = availableEndTimes[i];
+              option.textContent = availableEndTimes[i] + ' น.';
+              endTimeSelect.appendChild(option);
+            }
+            
+            endTimeSelect.disabled = false;
+            showMessage('✅ พร้อมจอง! กรุณาเลือกเวลาสิ้นสุดและกรอกข้อมูลเพิ่มเติม', 'success');
+          } else {
+            endTimeSelect.innerHTML = '<option value="">-- ไม่มีเวลาว่าง --</option>';
+            endTimeSelect.disabled = true;
+            showMessage('⚠️ ไม่มีเวลาสิ้นสุดที่ว่าง กรุณาเลือกเวลาเริ่มอื่น', 'error');
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading end times:', error);
+          endTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+          endTimeSelect.disabled = true;
+          showMessage('❌ เกิดข้อผิดพลาดในการโหลดเวลาสิ้นสุด', 'error');
+        })
+        .getAvailableEndTimes(date, room, startTime);
+    }// ===============================
+    // EDIT BOOKING FUNCTIONS
+    // ===============================
+
+    function openEditBookingModal(rowIndex, room, date, startTime, endTime, email, editCount) {
+      if (editCount >= 2) {
+        alert('⚠️ คุณได้แก้ไขการจองครบ 2 ครั้งแล้ว ไม่สามารถแก้ไขเพิ่มได้');
+        return;
+      }
+      
+      currentEditBooking = {
+        rowIndex: rowIndex,
+        room: room,
+        date: date,
+        startTime: startTime,
+        endTime: endTime,
+        email: email,
+        editCount: editCount
+      };
+      
+      const infoDiv = document.getElementById('editBookingInfo');
+      const remainingEdits = 2 - editCount;
+      infoDiv.innerHTML = '<p style="margin:0;"><strong>การจองปัจจุบัน:</strong></p>' +
+                         '<p style="margin:5px 0 0 0;">📍 ' + room + '</p>' +
+                         '<p style="margin:5px 0 0 0;">📅 ' + date + ' | ⏰ ' + startTime + ' - ' + endTime + '</p>' +
+                         '<p style="margin:10px 0 0 0;color:#666;font-size:13px;">✏️ เหลือสิทธิ์แก้ไข: <strong>' + remainingEdits + ' ครั้ง</strong></p>';
+      
+      document.getElementById('editRoomSelect').value = room;
+      
+      loadEditTimeSlots(date, room, startTime, endTime);
+      
+      document.getElementById('editBookingModal').classList.add('active');
+    }
+
+    function loadEditTimeSlots(date, room, currentStartTime, currentEndTime) {
+      const startTimeSelect = document.getElementById('editStartTimeSelect');
+      const endTimeSelect = document.getElementById('editEndTimeSelect');
+      
+      startTimeSelect.innerHTML = '<option value="">-- กำลังโหลด... --</option>';
+      startTimeSelect.disabled = true;
+      endTimeSelect.innerHTML = '<option value="">-- กรุณาเลือกเวลาเริ่มก่อน --</option>';
+      endTimeSelect.disabled = true;
+      
+      google.script.run
+        .withSuccessHandler(function(bookedSlots) {
+          startTimeSelect.innerHTML = '<option value="">-- เลือกเวลาเริ่ม --</option>';
+          
+          let hasAvailable = false;
+          for (let i = 0; i < allTimes.length; i++) {
+            const time = allTimes[i];
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time + ' น.';
+            
+            if (bookedSlots.includes(time) && time !== currentStartTime) {
+              option.disabled = true;
+              option.textContent += ' (ไม่ว่าง)';
+            } else {
+              hasAvailable = true;
+            }
+            
+            startTimeSelect.appendChild(option);
+          }
+          
+          if (hasAvailable) {
+            startTimeSelect.disabled = false;
+            startTimeSelect.value = currentStartTime;
+            loadEditEndTimeSlots(date, room, currentStartTime, currentEndTime);
+          } else {
+            startTimeSelect.innerHTML = '<option value="">-- ไม่มีเวลาว่าง --</option>';
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading edit time slots:', error);
+          startTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+        })
+        .getBookedSlotsExcludingCurrent(date, room, currentEditBooking.rowIndex);
+    }
+
+    function loadEditEndTimeSlots(date, room, startTime, currentEndTime) {
+      const endTimeSelect = document.getElementById('editEndTimeSelect');
+      
+      endTimeSelect.innerHTML = '<option value="">-- กำลังโหลด... --</option>';
+      endTimeSelect.disabled = true;
+      
+      google.script.run
+        .withSuccessHandler(function(bookedSlots) {
+          endTimeSelect.innerHTML = '<option value="">-- เลือกเวลาสิ้นสุด --</option>';
+          
+          const startIndex = allTimes.indexOf(startTime);
+          if (startIndex === -1) {
+            endTimeSelect.innerHTML = '<option value="">-- เวลาเริ่มไม่ถูกต้อง --</option>';
+            return;
+          }
+          
+          const endTimes = [...allTimes.slice(startIndex + 1), '16:00'];
+          let consecutiveAvailable = 0;
+          let hasAvailable = false;
+          
+          for (let i = 0; i < endTimes.length && consecutiveAvailable < 6; i++) {
+            const time = endTimes[i];
+            
+            if (bookedSlots.includes(time) && time !== currentEndTime) {
+              break;
+            }
+            
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time + ' น.';
+            endTimeSelect.appendChild(option);
+            
+            consecutiveAvailable++;
+            hasAvailable = true;
+          }
+          
+          if (hasAvailable) {
+            endTimeSelect.disabled = false;
+            if (currentEndTime && endTimeSelect.querySelector('option[value="' + currentEndTime + '"]')) {
+              endTimeSelect.value = currentEndTime;
+            }
+          } else {
+            endTimeSelect.innerHTML = '<option value="">-- ไม่มีเวลาว่าง --</option>';
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading edit end times:', error);
+          endTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+        })
+        .getBookedSlotsExcludingCurrent(date, room, currentEditBooking.rowIndex);
+    }
+
+    function handleEditBooking() {
+      if (!currentEditBooking) return;
+      
+      const newRoom = document.getElementById('editRoomSelect').value;
+      const newStartTime = document.getElementById('editStartTimeSelect').value;
+      const newEndTime = document.getElementById('editEndTimeSelect').value;
+      
+      if (!newRoom || !newStartTime || !newEndTime) {
+        showEditBookingMessage('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('confirmEditBookingBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลังบันทึก...';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            showEditBookingMessage('✅ ' + result.message, 'success');
+            setTimeout(function() {
+              document.getElementById('editBookingModal').classList.remove('active');
+              currentEditBooking = null;
+              loadMyBookings();
+              loadSchedule();
+            }, 2000);
+          } else {
+            showEditBookingMessage('❌ ' + result.message, 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = 'บันทึกการแก้ไข';
+        })
+        .withFailureHandler(function(error) {
+          showEditBookingMessage('❌ เกิดข้อผิดพลาด: ' + error.toString(), 'error');
+          btn.disabled = false;
+          btn.textContent = 'บันทึกการแก้ไข';
+        })
+        .editBooking(
+          currentEditBooking.rowIndex,
+          newRoom,
+          newStartTime,
+          newEndTime,
+          userEmail,
+          currentEditBooking.email
+        );
+    }
+
+    function showEditBookingMessage(text, type) {
+      const messageDiv = document.getElementById('editBookingMessage');
+      messageDiv.textContent = text;
+      messageDiv.className = 'message ' + type;
+      messageDiv.style.display = 'block';
+    }
+
+    // ===============================
+    // ADMIN FUNCTIONS
+    // ===============================
+
+    function loadAdminDashboard() {
+      google.script.run
+        .withSuccessHandler(function(reservations) {
+          displayAdminBookings(reservations);
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading admin dashboard:', error);
+        })
+        .getAllReservations();
+    }
+
+    function displayAdminBookings(reservations) {
+      const container = document.getElementById('allBookingsList');
+      
+      if (reservations.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#666;padding:20px;">ยังไม่มีการจอง</p>';
+        return;
+      }
+      
+      let html = '';
+      reservations.forEach(function(booking) {
+        const isCanceled = booking.isCanceled;
+        const canceledClass = isCanceled ? ' canceled' : '';
+        const checkedInClass = booking.isCheckedIn && !isCanceled ? ' checked-in' : '';
+        const checkedOutClass = booking.isCheckedOut && !isCanceled ? ' checked-out' : '';
+        
+        html += '<div class="booking-item' + checkedInClass + checkedOutClass + canceledClass + '">';
+        html += '<h4>' + booking.room + ' | ' + booking.date + '</h4>';
+        html += '<p><strong>เวลา:</strong> ' + booking.startTime + ' - ' + booking.endTime + '</p>';
+        html += '<p><strong>ชื่อ:</strong> ' + booking.name + '</p>';
+        html += '<p><strong>สาขา:</strong> ' + booking.department + ' | <strong>รหัส:</strong> ' + booking.studentId + '</p>';
+        html += '<p><strong>เบอร์:</strong> ' + booking.phone + ' | <strong>อีเมล:</strong> ' + booking.email + '</p>';
+        html += '<p><strong>รหัส Check-in:</strong> <span style="font-weight:700;color:#667eea;">' + booking.checkinCode + '</span></p>';
+        
+        if (isCanceled) {
+          const cancelType = booking.canceledType === 'AUTO' ? 'ยกเลิกอัตโนมัติ' : 'ยกเลิกโดยผู้ใช้';
+          html += '<p style="color:#757575;font-weight:600;">❌ ' + cancelType + '</p>';
+        } else {
+          if (booking.isCheckedIn) {
+            html += '<p style="color:#f57c00;font-weight:600;">✅ Check-in แล้ว</p>';
+          }
+          if (booking.isCheckedOut) {
+            html += '<p style="color:#2e7d32;font-weight:600;">🏁 Check-out แล้ว</p>';
+          }
+          
+          if (!booking.isCheckedOut) {
+            html += '<div class="action-buttons-group">';
+            html += '<button class="delete-btn btn-edit" onclick="openAdminEditModal(' + booking.rowIndex + ',\'' + booking.room + '\',\'' + booking.date + '\',\'' + booking.startTime + '\',\'' + booking.endTime + '\',\'' + booking.email + '\',\'' + booking.name + '\')">🔧 แก้ไข</button>';
+            html += '<button class="delete-btn btn-danger" onclick="adminDeleteBooking(' + booking.rowIndex + ',\'' + booking.email + '\')">🗑️ ยกเลิก</button>';
+            html += '</div>';
+          }
+        }
+        
+        html += '</div>';
+      });
+      
+      container.innerHTML = html;
+    }
+
+    function adminDeleteBooking(rowIndex, reservationEmail) {
+      if (!confirm('Admin: ยืนยันการยกเลิกการจองนี้?')) return;
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            alert(result.message);
+            loadAdminDashboard();
+            loadSchedule();
+          } else {
+            alert(result.message);
+          }
+        })
+        .withFailureHandler(function(error) {
+          alert('เกิดข้อผิดพลาด: ' + error.toString());
+        })
+        .deleteReservation(rowIndex, userEmail, reservationEmail);
+    }
+
+    function openAdminEditModal(rowIndex, room, date, startTime, endTime, email, name) {
+      currentAdminEditBooking = {
+        rowIndex: rowIndex,
+        room: room,
+        date: date,
+        startTime: startTime,
+        endTime: endTime,
+        email: email,
+        name: name
+      };
+      
+      const infoDiv = document.getElementById('adminEditInfo');
+      infoDiv.innerHTML = '<p style="margin:0;"><strong>การจองปัจจุบัน:</strong></p>' +
+                         '<p style="margin:5px 0 0 0;">👤 ' + name + ' (' + email + ')</p>' +
+                         '<p style="margin:5px 0 0 0;">📍 ' + room + '</p>' +
+                         '<p style="margin:5px 0 0 0;">📅 ' + date + ' | ⏰ ' + startTime + ' - ' + endTime + '</p>';
+      
+      document.getElementById('adminEditRoomSelect').value = room;
+      document.getElementById('adminEditDate').value = date;
+      
+      loadAdminEditTimeSlots();
+      
+      document.getElementById('adminEditModal').classList.add('active');
+    }
+
+    function loadAdminEditTimeSlots() {
+      const room = document.getElementById('adminEditRoomSelect').value;
+      const date = document.getElementById('adminEditDate').value;
+      const startTimeSelect = document.getElementById('adminEditStartTime');
+      const endTimeSelect = document.getElementById('adminEditEndTime');
+      
+      if (!room || !date) {
+        startTimeSelect.innerHTML = '<option value="">-- เลือกห้องและวันที่ก่อน --</option>';
+        endTimeSelect.innerHTML = '<option value="">-- เลือกเวลาเริ่มก่อน --</option>';
+        return;
+      }
+      
+      startTimeSelect.innerHTML = '<option value="">-- กำลังโหลด... --</option>';
+      startTimeSelect.disabled = true;
+      endTimeSelect.innerHTML = '<option value="">-- กรุณาเลือกเวลาเริ่มก่อน --</option>';
+      endTimeSelect.disabled = true;
+      
+      google.script.run
+        .withSuccessHandler(function(bookedSlots) {
+          startTimeSelect.innerHTML = '<option value="">-- เลือกเวลาเริ่ม --</option>';
+          
+          for (let i = 0; i < allTimes.length; i++) {
+            const time = allTimes[i];
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time + ' น.';
+            
+            if (bookedSlots.includes(time) && time !== currentAdminEditBooking.startTime) {
+              option.disabled = true;
+              option.textContent += ' (ไม่ว่าง)';
+            }
+            
+            startTimeSelect.appendChild(option);
+          }
+          
+          startTimeSelect.disabled = false;
+          startTimeSelect.value = currentAdminEditBooking.startTime;
+          loadAdminEditEndTimeSlots();
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading admin edit time slots:', error);
+          startTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+        })
+        .getBookedSlotsExcludingCurrent(date, room, currentAdminEditBooking.rowIndex);
+    }
+
+    function loadAdminEditEndTimeSlots() {
+      const room = document.getElementById('adminEditRoomSelect').value;
+      const date = document.getElementById('adminEditDate').value;
+      const startTime = document.getElementById('adminEditStartTime').value;
+      const endTimeSelect = document.getElementById('adminEditEndTime');
+      
+      if (!startTime) {
+        endTimeSelect.innerHTML = '<option value="">-- กรุณาเลือกเวลาเริ่มก่อน --</option>';
+        endTimeSelect.disabled = true;
+        return;
+      }
+      
+      endTimeSelect.innerHTML = '<option value="">-- กำลังโหลด... --</option>';
+      endTimeSelect.disabled = true;
+      
+      google.script.run
+        .withSuccessHandler(function(bookedSlots) {
+          endTimeSelect.innerHTML = '<option value="">-- เลือกเวลาสิ้นสุด --</option>';
+          
+          const startIndex = allTimes.indexOf(startTime);
+          if (startIndex === -1) {
+            endTimeSelect.innerHTML = '<option value="">-- เวลาเริ่มไม่ถูกต้อง --</option>';
+            return;
+          }
+          
+          const endTimes = [...allTimes.slice(startIndex + 1), '16:00'];
+          
+          for (let i = 0; i < endTimes.length; i++) {
+            const time = endTimes[i];
+            
+            if (bookedSlots.includes(time) && time !== currentAdminEditBooking.endTime) {
+              break;
+            }
+            
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time + ' น.';
+            endTimeSelect.appendChild(option);
+          }
+          
+          endTimeSelect.disabled = false;
+          if (endTimeSelect.querySelector('option[value="' + currentAdminEditBooking.endTime + '"]')) {
+            endTimeSelect.value = currentAdminEditBooking.endTime;
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading admin edit end times:', error);
+          endTimeSelect.innerHTML = '<option value="">-- เกิดข้อผิดพลาด --</option>';
+        })
+        .getBookedSlotsExcludingCurrent(date, room, currentAdminEditBooking.rowIndex);
+    }
+
+    function handleAdminEdit() {
+      if (!currentAdminEditBooking) return;
+      
+      const newRoom = document.getElementById('adminEditRoomSelect').value;
+      const newDate = document.getElementById('adminEditDate').value;
+      const newStartTime = document.getElementById('adminEditStartTime').value;
+      const newEndTime = document.getElementById('adminEditEndTime').value;
+      
+      if (!newRoom || !newDate || !newStartTime || !newEndTime) {
+        showAdminEditMessage('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('confirmAdminEditBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลังบันทึก...';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            showAdminEditMessage('✅ ' + result.message, 'success');
+            setTimeout(function() {
+              document.getElementById('adminEditModal').classList.remove('active');
+              currentAdminEditBooking = null;
+              loadAdminDashboard();
+              loadSchedule();
+            }, 2000);
+          } else {
+            showAdminEditMessage('❌ ' + result.message, 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = 'บันทึกการแก้ไข';
+        })
+        .withFailureHandler(function(error) {
+          showAdminEditMessage('❌ เกิดข้อผิดพลาด: ' + error.toString(), 'error');
+          btn.disabled = false;
+          btn.textContent = 'บันทึกการแก้ไข';
+        })
+        .adminEditBooking(
+          currentAdminEditBooking.rowIndex,
+          newRoom,
+          newDate,
+          newStartTime,
+          newEndTime,
+          userEmail
+        );
+    }
+
+    function showAdminEditMessage(text, type) {
+      const messageDiv = document.getElementById('adminEditMessage');
+      messageDiv.textContent = text;
+      messageDiv.className = 'message ' + type;
+      messageDiv.style.display = 'block';
+    }
+
+    function loadTodayCheckins() {
+      google.script.run
+        .withSuccessHandler(function(checkins) {
+          displayTodayCheckins(checkins);
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading today checkins:', error);
+        })
+        .getTodayCheckins();
+    }
+
+    function displayTodayCheckins(checkins) {
+      const container = document.getElementById('todayCheckinsList');
+      
+      if (checkins.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#666;padding:20px;">วันนี้ยังไม่มีการจอง</p>';
+        return;
+      }
+      
+      let html = '';
+      checkins.forEach(function(checkin) {
+        let statusClass = '';
+        let statusIcon = '';
+        
+        if (checkin.status === 'ยกเลิกอัตโนมัติ' || checkin.status === 'ยกเลิกโดยผู้ใช้') {
+          statusClass = 'status-canceled';
+          statusIcon = '❌';
+        } else if (checkin.status === 'เสร็จสิ้น') {
+          statusClass = 'status-completed';
+          statusIcon = '🏁';
+        } else if (checkin.status === 'กำลังใช้งาน') {
+          statusClass = 'status-using';
+          statusIcon = '🔸';
+        } else {
+          statusClass = 'status-waiting';
+          statusIcon = '⏳';
+        }
+        
+        html += '<div class="booking-item">';
+        html += '<h4>' + checkin.room + ' <span class="status-badge ' + statusClass + '">' + statusIcon + ' ' + checkin.status + '</span></h4>';
+        html += '<p><strong>เวลา:</strong> ' + checkin.startTime + ' - ' + checkin.endTime + '</p>';
+        html += '<p><strong>ชื่อ:</strong> ' + checkin.name + ' | <strong>สาขา:</strong> ' + checkin.department + '</p>';
+        html += '<p><strong>อีเมล:</strong> ' + checkin.email + '</p>';
+        html += '<p><strong>รหัส Check-in:</strong> <span style="font-weight:700;color:#667eea;">' + checkin.checkinCode + '</span></p>';
+        
+        if (checkin.isCheckedIn) {
+          html += '<p style="color:#f57c00;font-weight:600;">✅ Check-in: ' + checkin.checkinTime + '</p>';
+        }
+        if (checkin.isCheckedOut) {
+          html += '<p style="color:#2e7d32;font-weight:600;">🏁 Check-out: ' + checkin.checkoutTime + '</p>';
+        }
+        
+        html += '</div>';
+      });
+      
+      container.innerHTML = html;
+    }
+
+    function loadRoomLocks() {
+      google.script.run
+        .withSuccessHandler(function(locks) {
+          displayRoomLocks(locks);
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading room locks:', error);
+        })
+        .getRoomLocks();
+    }
+
+    function displayRoomLocks(locks) {
+      const container = document.getElementById('roomLocksList');
+      
+      if (locks.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#666;padding:20px;">ยังไม่มีห้องที่ถูกล็อค</p>';
+        return;
+      }
+      
+      let html = '';
+      locks.forEach(function(lock) {
+        html += '<div class="lock-item">';
+        html += '<h4>🔒 ' + lock.room + '</h4>';
+        html += '<p><strong>วันที่:</strong> ' + lock.startDate + ' ถึง ' + lock.endDate + '</p>';
+        html += '<p><strong>เวลา:</strong> ' + lock.startTime + ' - ' + lock.endTime + '</p>';
+        html += '<p><strong>เหตุผล:</strong> ' + lock.reason + '</p>';
+        html += '<p><strong>Admin:</strong> ' + lock.adminEmail + '</p>';
+        html += '<button class="btn-danger" onclick="unlockRoom(\'' + lock.lockId + '\')">🔓 ปลดล็อค</button>';
+        html += '</div>';
+      });
+      
+      container.innerHTML = html;
+    }
+
+    function openLockRoomModal() {
+      document.getElementById('lockRoomModal').classList.add('active');
+    }
+
+    function handleLockRoom() {
+      const room = document.getElementById('lockRoomSelect').value;
+      const startDate = document.getElementById('lockStartDate').value;
+      const endDate = document.getElementById('lockEndDate').value;
+      const startTime = document.getElementById('lockStartTime').value;
+      const endTime = document.getElementById('lockEndTime').value;
+      const reason = document.getElementById('lockReason').value;
+      
+      if (!room || !startDate || !endDate || !reason) {
+        showLockRoomMessage('กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('confirmLockRoomBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ กำลังล็อค...';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            showLockRoomMessage('✅ ' + result.message, 'success');
+            document.getElementById('lockRoomSelect').value = '';
+            document.getElementById('lockStartDate').value = '';
+            document.getElementById('lockEndDate').value = '';
+            document.getElementById('lockReason').value = '';
+            
+            setTimeout(function() {
+              document.getElementById('lockRoomModal').classList.remove('active');
+              loadRoomLocks();
+              loadSchedule();
+            }, 2000);
+          } else {
+            showLockRoomMessage('❌ ' + result.message, 'error');
+          }
+          btn.disabled = false;
+          btn.textContent = '🔒 ล็อคห้อง';
+        })
+        .withFailureHandler(function(error) {
+          showLockRoomMessage('❌ เกิดข้อผิดพลาด: ' + error.toString(), 'error');
+          btn.disabled = false;
+          btn.textContent = '🔒 ล็อคห้อง';
+        })
+        .lockRoom(room, startDate, endDate, startTime, endTime, reason, userEmail);
+    }
+
+    function showLockRoomMessage(text, type) {
+      const messageDiv = document.getElementById('lockRoomMessage');
+      messageDiv.textContent = text;
+      messageDiv.className = 'message ' + type;
+      messageDiv.style.display = 'block';
+    }
+
+    function unlockRoom(lockId) {
+      if (!confirm('ยืนยันการปลดล็อคห้องนี้?')) return;
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            alert(result.message);
+            loadRoomLocks();
+            loadSchedule();
+          } else {
+            alert(result.message);
+          }
+        })
+        .withFailureHandler(function(error) {
+          alert('เกิดข้อผิดพลาด: ' + error.toString());
+        })
+        .unlockRoom(lockId, userEmail);
+    }
+
+    function loadDashboardAnalytics() {
+      google.script.run
+        .withSuccessHandler(function(analytics) {
+          document.getElementById('totalBookings').textContent = analytics.totalBookings;
+          document.getElementById('activeBookings').textContent = analytics.activeBookings;
+          document.getElementById('completedBookings').textContent = analytics.completedBookings;
+          document.getElementById('cancelledBookings').textContent = analytics.cancelledBookings;
+          document.getElementById('weekBookings').textContent = analytics.weekBookings;
+          document.getElementById('monthBookings').textContent = analytics.monthBookings;
+          document.getElementById('totalUsers').textContent = analytics.userStats.totalUsers;
+          
+          displayRoomUsageChart(analytics.roomUsage);
+          displayPeakHoursChart(analytics.peakHours);
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading analytics:', error);
+        })
+        .getDashboardAnalytics();
+    }
+
+    function loadQuickStats() {
+      google.script.run
+        .withSuccessHandler(function(stats) {
+          document.getElementById('quickTotalToday').textContent = stats.totalToday;
+          document.getElementById('quickWaitingCheckin').textContent = stats.waitingCheckin;
+          document.getElementById('quickCheckedInToday').textContent = stats.checkedInToday;
+          document.getElementById('quickCompletedToday').textContent = stats.completedToday;
+          document.getElementById('quickCancelledToday').textContent = stats.cancelledToday;
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading quick stats:', error);
+        })
+        .getQuickStats();
+    }
+
+    function displayRoomUsageChart(roomUsage) {
+      const container = document.getElementById('roomUsageChart');
+      let html = '';
+      
+      const maxValue = Math.max(...Object.values(roomUsage), 1);
+      
+      for (let room in roomUsage) {
+        const count = roomUsage[room];
+        const percentage = (count / maxValue) * 100;
+        
+        html += '<div class="chart-bar">';
+        html += '<div class="chart-bar-label"><span>' + room + '</span><span>' + count + ' ครั้ง</span></div>';
+        html += '<div class="chart-bar-fill" style="width:' + percentage + '%"></div>';
+        html += '</div>';
+      }
+      
+      container.innerHTML = html;
+    }
+
+    function displayPeakHoursChart(peakHours) {
+      const container = document.getElementById('peakHoursChart');
+      let html = '';
+      
+      const maxValue = Math.max(...Object.values(peakHours), 1);
+      
+      for (let hour in peakHours) {
+        const count = peakHours[hour];
+        const percentage = (count / maxValue) * 100;
+        
+        html += '<div class="chart-bar">';
+        html += '<div class="chart-bar-label"><span>' + hour + ' น.</span><span>' + count + ' ครั้ง</span></div>';
+        html += '<div class="chart-bar-fill" style="width:' + percentage + '%"></div>';
+        html += '</div>';
+      }
+      
+      container.innerHTML = html;
+    }
+
+    function loadRecentActivity() {
+      google.script.run
+        .withSuccessHandler(function(activities) {
+          displayRecentActivity(activities);
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error loading recent activity:', error);
+        })
+        .getRecentActivity(10);
+    }
+
+    function displayRecentActivity(activities) {
+      const container = document.getElementById('recentActivity');
+      
+      if (activities.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#666;padding:20px;">ยังไม่มีกิจกรรม</p>';
+        return;
+      }
+      
+      let html = '';
+      activities.forEach(function(activity) {
+        html += '<div class="activity-item">';
+        html += '<div class="activity-time">' + activity.date + ' ' + activity.time + '</div>';
+        html += '<div class="activity-desc">';
+        html += '<strong>' + activity.name + '</strong> ' + activity.action + ' ';
+        html += activity.room + ' (' + activity.bookingDate + ')';
+        html += '</div>';
+        html += '</div>';
+      });
+      
+      container.innerHTML = html;
+    }
+
+    function searchBookings() {
+      const searchType = document.getElementById('searchType').value;
+      const searchTerm = document.getElementById('searchTerm').value.trim();
+      
+      if (!searchTerm) {
+        alert('กรุณากรอกคำค้นหา');
+        return;
+      }
+      
+      google.script.run
+        .withSuccessHandler(function(results) {
+          isSearchMode = true;
+          displaySearchResults(results, searchTerm);
+        })
+        .withFailureHandler(function(error) {
+          alert('เกิดข้อผิดพลาด: ' + error.toString());
+        })
+        .searchBookings(searchTerm, searchType);
+    }
+
+    function displaySearchResults(results, searchTerm) {
+      const headerDiv = document.getElementById('searchResultsHeader');
+      const container = document.getElementById('allBookingsList');
+      
+      headerDiv.style.display = 'block';
+      headerDiv.className = 'search-results-header';
+      headerDiv.innerHTML = '<div class="result-count">🔍 พบผลการค้นหา: <strong>' + results.length + '</strong> รายการ (คำค้นหา: "' + searchTerm + '")</div>';
+      
+      if (results.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#666;padding:20px;">ไม่พบผลการค้นหา</p>';
+        return;
+      }
+      
+      displayAdminBookings(results);
+    }
+
+    function clearSearch() {
+      isSearchMode = false;
+      document.getElementById('searchTerm').value = '';
+      document.getElementById('searchResultsHeader').style.display = 'none';
+      loadAdminDashboard();
+    }
+
+    function exportToExcel() {
+      const exportType = document.getElementById('exportType').value;
+      const startDate = document.getElementById('exportStartDate').value;
+      const endDate = document.getElementById('exportEndDate').value;
+      
+      if (exportType === 'daterange' && (!startDate || !endDate)) {
+        alert('⚠️ กรุณาเลือกวันที่เริ่มต้นและสิ้นสุด');
+        return;
+      }
+      
+      const resultDiv = document.getElementById('exportResultMessage');
+      resultDiv.style.display = 'block';
+      resultDiv.className = 'export-result-message';
+      resultDiv.innerHTML = '<p style="margin:0;">⏳ กำลังสร้างไฟล์ Excel กรุณารอสักครู่...</p>';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            resultDiv.innerHTML = '<h4>✅ Export สำเร็จ!</h4>' +
+                                 '<p>' + result.message + '</p>' +
+                                 '<a href="' + result.url + '" target="_blank" class="export-download-link">📥 เปิดไฟล์ Excel</a>';
+          } else {
+            resultDiv.innerHTML = '<p style="margin:0;color:#dc2743;">❌ ' + result.message + '</p>';
+          }
+        })
+        .withFailureHandler(function(error) {
+          resultDiv.innerHTML = '<p style="margin:0;color:#dc2743;">❌ เกิดข้อผิดพลาด: ' + error.toString() + '</p>';
+        })
+        .exportBookingsToExcel(exportType, startDate, endDate);
+    }
+  </script>
+</body>
+</html>
